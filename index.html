@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SafeVoice — A safe first step toward trustworthy help</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --accent: #2563eb;
+      --danger: #b91c1c;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    header { text-align: center; margin-bottom: 24px; }
+    header h1 { font-size: 28px; margin: 0 0 4px; color: var(--accent); }
+    header p { margin: 0; color: var(--muted); font-size: 14px; }
+    .demo-banner {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      color: #9a3412;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .demo-banner strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .card h2 { font-size: 20px; margin: 0 0 10px; }
+    .card p { margin: 0 0 10px; font-size: 14px; color: var(--text); }
+    .card ul { margin: 0 0 10px 18px; padding: 0; font-size: 14px; }
+    .card .muted { color: var(--muted); font-size: 13px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+    }
+    button {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    button:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+    .back-row { display: flex; gap: 10px; margin-top: 14px; }
+    .back-row button { width: auto; }
+    .danger-note {
+      color: var(--danger);
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SafeVoice</h1>
+      <p>A safe first step toward trustworthy help</p>
+    </header>
+    <div class="demo-banner">
+      <strong>PROTOTYPE MODE – IMPORTANT</strong>
+      This is a demonstration prototype. It does not contact counselors, police, emergency services, or child-protection agencies. Do not enter real names, passwords, addresses, phone numbers, images, or detailed information about abuse.
+    </div>
+    <div id="home" class="section active">
+      <div class="card">
+        <h2>Welcome to SafeVoice</h2>
+        <p>SafeVoice is a direct youth-safety support tool. It helps children and teenagers take a clear, low-barrier first step toward verified help when they feel unable to speak to a parent or guardian immediately.</p>
+        <p class="muted">This prototype does not collect, store, or send real reports. A full deployment would require verified counselors, child-protection partners, trained moderators, legal review, security testing, privacy safeguards, and verified local contacts.</p>
+      </div>
+      <div class="card">
+        <h2>Choose what you need</h2>
+        <div class="menu-grid">
+          <button onclick="showSection('urgent')">1. I Need Help Now</button>
+          <button onclick="showSection('trained')">2. Talk to a Trained Supporter</button>
+          <button onclick="showSection('report')">3. Report Something Safely</button>
+          <button onclick="showSection('resources')">4. Safety Resource Library</button>
+          <button onclick="showSection('community')">5. Community Support, Moderated</button>
+          <button onclick="showSection('about')">6. About SafeVoice</button>
+        </div>
+        <p class="muted" style="margin-top:10px;">You can always come back to this menu. This is not an emergency service.</p>
+      </div>
+    </div>
+    <div id="urgent" class="section">
+      <div class="card">
+        <h2>I Need Help Now</h2>
+        <p>This prototype cannot contact emergency services automatically.</p>
+        <p>If someone is in immediate danger:</p>
+        <ul>
+          <li>Go to a safer place if you can do so safely.</li>
+          <li>Tell a trusted adult immediately.</li>
+          <li>Contact the appropriate local emergency or child-protection service.</li>
+          <li>Do not confront an unsafe person alone.</li>
+          <li>If online blackmail is involved, do not send more money or images.</li>
+        </ul>
+        <p class="danger-note">A real app must verify local emergency and child-protection contacts before displaying them.</p>
+        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
+      </div>
+    </div>
+    <div id="trained" class="section">
+      <div class="card">
+        <h2>Talk to a Trained Supporter</h2>
+        <div class="demo-banner" style="margin-bottom:12px;">
+          <strong>PROTOTYPE MODE</strong>
+          This does not connect you to counselors or emergency services. Do not enter real personal information.
+        </div>
+        <p>A full SafeVoice service would connect users only with:</p>
+        <ul>
+          <li>Verified child-safety counselors.</li>
+          <li>Trained mental-health professionals.</li>
+          <li>Authorized child-protection professionals.</li>
+          <li>Approved cyber-safety specialists for online threats.</li>
+        </ul>
+        <p class="danger-note">It must never connect a child directly with an unknown adult. It must never allow unmoderated private messaging.</p>
+        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
+      </div>
+    </div>
+    <div id="report" class="section">
+      <div class="card">
+        <h2>Report Something Safely</h2>
+        <div class="demo-banner" style="margin-bottom:12px;">
+          <strong>PROTOTYPE MODE</strong>
+          This does NOT submit reports. Do not enter real personal information.
+        </div>
+        <p>A full reporting system should:</p>
+        <ul>
+          <li>Explain what information will be collected.</li>
+          <li>Collect only essential information.</li>
+          <li>Explain who will receive the report.</li>
+          <li>Encrypt data during transfer and storage.</li>
+          <li>Send urgent situations to trained safeguarding staff.</li>
+          <li>Show immediate safety guidance.</li>
+        </ul>
+        <p class="muted">This prototype does not collect, save, or send any reports.</p>
+        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
+      </div>
+    </div>
+    <div id="resources" class="section">
+      <div class="card">
+        <h2>Safety Resource Library</h2>
+        <p class="muted">Choose a topic to read age-appropriate safety guidance.</p>
+        <div style="display:grid; gap:8px; margin-bottom:14px;">
+          <button onclick="showResource('r1')">1. Safety and Rights</button>
+          <button onclick="showResource('r2')">2. Online Threats and Blackmail</button>
+          <button onclick="showResource('r3')">3. Bullying</button>
+          <button onclick="showResource('r4')">4. A Simple Safety Plan</button>
+          <button onclick="showResource('r5')">5. Getting Support</button>
+          <button onclick="showSection('home')">6. Back to SafeVoice home</button>
+        </div>
+        <div id="r1" class="resource-view" style="display:none;">
+          <h3 style="margin:14px 0 6px;">Safety and Rights</h3>
+          <p>Everyone deserves to be treated safely and respectfully. Abuse, threats, bullying, blackmail, and exploitation are not your fault. If it is safe, consider telling a trusted adult, teacher, counselor, doctor, relative, or child-protection professional.</p>
+          <div class="back-row"><button onclick="hideResource('r1')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
+        </div>
+        <div id="r2" class="resource-view" style="display:none;">
+          <h3 style="margin:14px 0 6px;">Online Threats and Blackmail</h3>
+          <p>If someone pressures, threatens, or blackmails you online, do not send more images, money, passwords, or personal information. Do not meet the person alone. If it is safe, save usernames, dates, and messages, then ask a trusted adult or verified cyber-safety service for help.</p>
+          <div class="back-row"><button onclick="hideResource('r2')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
+        </div>
+        <div id="r3" class="resource-view" style="display:none;">
+          <h3 style="margin:14px 0 6px;">Bullying</h3>
+          <p>Bullying is not your fault. If it is safe, save dates, messages, or screenshots. Tell a trusted adult or use available reporting processes. Avoid responding to threats alone.</p>
+          <div class="back-row"><button onclick="hideResource('r3')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
+        </div>
+        <div id="r4" class="resource-view" style="display:none;">
+          <h3 style="margin:14px 0 6px;">A Simple Safety Plan</h3>
+          <p>Think of one trusted adult and one backup adult you could contact. If you feel unsafe, move toward a safer public place when possible. Do not confront a person who may harm you, and do not tell an unsafe person about your plan.</p>
+          <div class="back-row"><button onclick="hideResource('r4')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
+        </div>
+        <div id="r5" class="resource-view" style="display:none;">
+          <h3 style="margin:14px 0 6px;">Getting Support</h3>
+          <p>You deserve support from trained people. A counselor can provide emotional support. A child-protection professional can help with safeguarding. A cyber-safety specialist can help with online threats. This prototype cannot replace these services.</p>
+          <div class="back-row"><button onclick="hideResource('r5')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="community" class="section">
+      <div class="card">
+        <h2>Community Support, Moderated</h2>
+        <div class="demo-banner" style="margin-bottom:12px;">
+          <strong>PROTOTYPE MODE</strong>
+          This does not run a real community. Do not enter real personal information.
+        </div>
+        <p>Peer encouragement can reduce loneliness, but it must be safe.</p>
+        <p>A full community-support feature would require:</p>
+        <ul>
+          <li>Anonymous usernames instead of real names.</li>
+          <li>No private messaging.</li>
+          <li>No adult pretending to be a peer.</li>
+          <li>No sharing addresses, phone numbers, passwords, or images.</li>
+          <li>Trained moderators reviewing content.</li>
+          <li>Clear reporting tools and safety rules.</li>
+          <li>Escalation of high-risk posts to trained professionals.</li>
+        </ul>
+        <p>Example supportive messages:</p>
+        <ul>
+          <li>[Moderator] "You are not alone."</li>
+          <li>[Moderator] "What happened is not your fault."</li>
+          <li>[Moderator] "Please contact a trusted adult or trained helper."</li>
+        </ul>
+        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
+      </div>
+    </div>
+    <div id="about" class="section">
+      <div class="card">
+        <h2>About SafeVoice</h2>
+        <p>SafeVoice — Youth Safety Support Prototype (2026)</p>
+        <p>SafeVoice is a direct youth-safety support and reporting concept. It gives children and teenagers a clear, low-barrier first step toward verified help when they feel unable to tell a parent or guardian immediately.</p>
+        <p>The concept includes:</p>
+        <ul>
+          <li>Urgent-help guidance.</li>
+          <li>Verified professional-support pathways.</li>
+          <li>Safer reporting pathways.</li>
+          <li>Age-appropriate safety resources.</li>
+          <li>Moderated community-support principles.</li>
+        </ul>
+        <p class="danger-note">This is a demonstration prototype only. It is not a real counseling, emergency, police, or child-protection service. Do not use this in a real crisis. For demonstration purposes only.</p>
+        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
+      </div>
+    </div>
+    <footer>SafeVoice — demonstration prototype. Not an emergency service. Does not collect or store real data.</footer>
+  </div>
+  <script>
+    function hideAllResources() {
+      document.querySelectorAll('.resource-view').forEach(view => {
+        view.style.display = 'none';
+      });
+    }
+    function showSection(id) {
+      hideAllResources();
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function showResource(resId) {
+      document.getElementById(resId).style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+    function hideResource(resId) {
+      document.getElementById(resId).style.display = 'none';
+    }
+  </script>
+</body>
+</html>
