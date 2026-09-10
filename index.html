@@ -101,22 +101,494 @@
       This is a demonstration prototype. It does not contact counselors, police, emergency services, or child-protection agencies. Do not enter real names, passwords, addresses, phone numbers, images, or detailed information about abuse.
     </div>
     <div id="home" class="section active">
-      <div class="card">
-        <h2>Welcome to SafeVoice</h2>
-        <p>SafeVoice is a direct youth-safety support tool. It helps children and teenagers take a clear, low-barrier first step toward verified help when they feel unable to speak to a parent or guardian immediately.</p>
-        <p class="muted">This prototype does not collect, store, or send real reports. A full deployment would require verified counselors, child-protection partners, trained moderators, legal review, security testing, privacy safeguards, and verified local contacts.</p>
-      </div>
-      <div class="card">
-        <h2>Choose what you need</h2>
-        <div class="menu-grid">
-          <button onclick="showSection('urgent')">1. I Need Help Now</button>
-          <button onclick="showSection('trained')">2. Get verified help</button>
-          <button onclick="showSection('report')">3. Report Something Safely</button>
-          <button onclick="showSection('resources')">4. Safety Resource Library</button>
-          <button onclick="showSection('community')">5. Community Support, Moderated</button>
-          <button onclick="showSection('about')">6. About SafeVoice</button>
+      <div class="card safety-intro">
+        <h2>You're welcome here</h2>
+
+        <p>
+          You do not have to share names, addresses, phone numbers, passwords,
+          photos, or detailed information.
+        </p>
+
+        <p>
+          Are you feeling unsafe, being hurt, threatened, or pressured by someone?
+        </p>
+
+        <div class="flow-buttons">
+          <button onclick="showFlow('concerned')">Yes, I need help</button>
+          <button onclick="showFlow('information')">No, I'm here for information</button>
+          <button onclick="showFlow('unsure')">I'm not sure</button>
         </div>
-        <p class="muted" style="margin-top:10px;">You can always come back to this menu. This is not an emergency service.</p>
+
+        <div class="flow-note">
+          SafeVoice is a demonstration prototype. It is not a human, emergency
+          service, counsellor, investigator, or reporting service.
+        </div>
+
+        <div class="direct-menu">
+          <h3>Browse SafeVoice directly</h3>
+          <p class="choice-help">
+            You can also open any section without completing the guided questions.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showSection('urgent')">
+              I Need Help Now
+            </button>
+
+            <button onclick="showSection('trained')">
+              Get verified help
+            </button>
+
+            <button onclick="showSection('report')">
+              Report Something Safely
+            </button>
+
+            <button onclick="showSection('resources')">
+              Safety Resource Library
+            </button>
+
+            <button onclick="showSection('community')">
+              Community Support, Moderated
+            </button>
+
+            <button onclick="showSection('about')">
+              About SafeVoice
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concerned" class="flow-panel">
+        <div class="card">
+          <h2>Who are you seeking help for?</h2>
+          <p>Choose the option that fits best. You can continue without sharing details.</p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('concern-type-myself')">Myself</button>
+            <button onclick="showFlow('concern-type-child')">My child or a young person</button>
+            <button onclick="showFlow('concern-type-student')">A student I support</button>
+            <button onclick="showFlow('concern-type-friend')">A friend or sibling</button>
+            <button onclick="showFlow('concern-type-other')">Someone else</button>
+            <button onclick="showFlow('unsure')">I'm not sure</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-information" class="flow-panel">
+        <div class="card">
+          <h2>Information and safety resources</h2>
+          <p>
+            You can learn about safety without sharing personal information.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showSection('resources')">
+              Open Safety Resource Library
+            </button>
+            <button onclick="showSection('about')">Learn about SafeVoice</button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-unsure" class="flow-panel">
+        <div class="card">
+          <h2>It's okay not to be sure</h2>
+          <p>
+            You do not need to label what is happening. If someone makes you feel
+            unsafe, pressured, threatened, or hurt, you deserve support.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('concern-type-myself')">I want help</button>
+            <button onclick="showSection('resources')">
+              Read safety information
+            </button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concern-type-myself" class="flow-panel">
+        <div class="card">
+          <h2>What kind of safety concern is this?</h2>
+          <p>
+            Choose one or more broad options. You do not need to explain what
+            happened.
+          </p>
+
+          <p class="choice-help">
+            Do not enter names, addresses, phone numbers, passwords, images, or
+            detailed descriptions.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('myself')">
+              Someone is hurting me physically
+            </button>
+            <button onclick="showFlow('myself')">
+              Someone is threatening or blackmailing me
+            </button>
+            <button onclick="showFlow('myself')">
+              Something harmful happened online
+            </button>
+            <button onclick="showFlow('myself')">
+              Someone is pressuring or exploiting me
+            </button>
+            <button onclick="showFlow('myself')">
+              Bullying or harassment
+            </button>
+            <button onclick="showFlow('myself')">I'm not sure</button>
+            <button onclick="showFlow('myself')">I don't want to say</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concern-type-child" class="flow-panel">
+        <div class="card">
+          <h2>What kind of safety concern is involved?</h2>
+          <p>
+            Choose a broad category only. Do not investigate or ask the child to
+            repeat details.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('child')">Physical harm</button>
+            <button onclick="showFlow('child')">Threats or blackmail</button>
+            <button onclick="showFlow('child')">Online harm</button>
+            <button onclick="showFlow('child')">Bullying or harassment</button>
+            <button onclick="showFlow('child')">I'm not sure</button>
+            <button onclick="showFlow('child')">I don't want to say</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concern-type-student" class="flow-panel">
+        <div class="card">
+          <h2>What kind of safety concern is involved?</h2>
+          <p>
+            Choose a broad category only. Follow your school or organisation's
+            safeguarding procedure.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('student')">Physical harm</button>
+            <button onclick="showFlow('student')">Threats or blackmail</button>
+            <button onclick="showFlow('student')">Online harm</button>
+            <button onclick="showFlow('student')">Bullying or harassment</button>
+            <button onclick="showFlow('student')">I'm not sure</button>
+            <button onclick="showFlow('student')">I don't want to say</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concern-type-friend" class="flow-panel">
+        <div class="card">
+          <h2>What kind of safety concern is involved?</h2>
+          <p>
+            Focus on safety. Do not investigate or confront the person causing
+            harm.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('friend')">Physical harm</button>
+            <button onclick="showFlow('friend')">Threats or blackmail</button>
+            <button onclick="showFlow('friend')">Online harm</button>
+            <button onclick="showFlow('friend')">Bullying or harassment</button>
+            <button onclick="showFlow('friend')">I'm not sure</button>
+            <button onclick="showFlow('friend')">I don't want to say</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-concern-type-other" class="flow-panel">
+        <div class="card">
+          <h2>What kind of safety concern is involved?</h2>
+          <p>
+            Choose a broad category only. The purpose is to offer general guidance,
+            not to investigate.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('other')">Physical harm</button>
+            <button onclick="showFlow('other')">Threats or blackmail</button>
+            <button onclick="showFlow('other')">Online harm</button>
+            <button onclick="showFlow('other')">Bullying or harassment</button>
+            <button onclick="showFlow('other')">I'm not sure</button>
+            <button onclick="showFlow('other')">I don't want to say</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-myself" class="flow-panel">
+        <div class="card">
+          <h2>Have you told a safe person yet?</h2>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('told-helping')">
+              Yes, and they are helping
+            </button>
+            <button onclick="showFlow('told-not-helping')">
+              I tried, but I was not believed
+            </button>
+            <button onclick="showFlow('not-told')">
+              No, I have not told anyone
+            </button>
+            <button onclick="showFlow('not-safe-telling')">
+              I do not feel safe telling anyone
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-child" class="flow-panel">
+        <div class="card">
+          <h2>Has the young person told a safe person?</h2>
+          <p>
+            Listen calmly. Do not investigate, blame, promise secrecy, or make
+            them repeat the story.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('told-helping')">
+              Yes, and someone is helping
+            </button>
+            <button onclick="showFlow('not-told')">
+              No, no one has been told
+            </button>
+            <button onclick="showFlow('not-safe-telling')">
+              They may not be safe telling someone
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-student" class="flow-panel">
+        <div class="card">
+          <h2>Has the student told a safe person?</h2>
+          <p>
+            Listen calmly and follow your school or organisation's safeguarding
+            procedure.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('told-helping')">
+              Yes, and someone is helping
+            </button>
+            <button onclick="showFlow('not-told')">
+              No, no one has been told
+            </button>
+            <button onclick="showFlow('not-safe-telling')">
+              The student may be in immediate danger
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-friend" class="flow-panel">
+        <div class="card">
+          <h2>Has your friend or sibling told a safe person?</h2>
+          <p>
+            Listen and encourage safe adult support. Do not investigate or confront
+            anyone alone.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('told-helping')">
+              Yes, and someone is helping
+            </button>
+            <button onclick="showFlow('not-told')">
+              No, no one has been told
+            </button>
+            <button onclick="showFlow('not-safe-telling')">
+              They may not be safe right now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-other" class="flow-panel">
+        <div class="card">
+          <h2>Choose the safest next step</h2>
+          <p>
+            Focus on immediate safety and contact an appropriate trusted adult,
+            child-protection service, or emergency service.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('told-helping')">
+              Someone is already helping
+            </button>
+            <button onclick="showFlow('not-told')">
+              No one has been told
+            </button>
+            <button onclick="showFlow('not-safe-telling')">
+              There may be immediate danger
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-told-helping" class="flow-panel">
+        <div class="card">
+          <h2>I'm glad you reached out</h2>
+          <p>
+            You do not need to repeat everything here. Stay connected with the safe
+            person who is helping.
+          </p>
+          <p>
+            If the situation remains unsafe or they could not help, choose another
+            trusted adult or trained service.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('danger')">I still feel unsafe</button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-told-not-helping" class="flow-panel">
+        <div class="card">
+          <h2>You deserve to be taken seriously</h2>
+          <p>
+            Not being believed does not mean it was your fault. If it is safe, try
+            another trusted adult or trained service.
+          </p>
+          <p>
+            You can say: "I told someone before, but I still need help and I was
+            not taken seriously."
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('danger')">I still feel unsafe</button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-not-told" class="flow-panel">
+        <div class="card">
+          <h2>You can start with one safe person</h2>
+          <p>
+            If it is safe, consider telling a trusted adult, such as a parent,
+            relative, teacher, school counsellor, doctor, or child-protection
+            professional.
+          </p>
+          <p>
+            You can begin with:
+            <em>"Something is happening and I don't feel safe. I need help."</em>
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('can-tell')">
+              I can tell someone today
+            </button>
+            <button onclick="showFlow('scared-telling')">
+              I'm scared to tell someone
+            </button>
+            <button onclick="showFlow('no-one')">
+              I don't know whom to tell
+            </button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-can-tell" class="flow-panel">
+        <div class="card">
+          <h2>That is a strong next step</h2>
+          <p>
+            You can speak, write a message, or show a safe adult this page. Choose
+            someone who is not connected to the person causing harm.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-scared-telling" class="flow-panel">
+        <div class="card">
+          <h2>You can take a smaller step</h2>
+          <p>
+            You can write a message instead of saying it aloud. Choose a safe adult
+            who is not connected to the person causing harm.
+          </p>
+          <p>Do not confront the person causing harm alone.</p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('no-one')">
+              I don't know whom to tell
+            </button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showFlow('danger')">
+              I am in immediate danger
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-no-one" class="flow-panel">
+        <div class="card">
+          <h2>You deserve help</h2>
+          <p>
+            Think of a safe adult who may listen: a relative, teacher, school
+            counsellor, doctor, or child-protection professional.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showFlow('danger')">
+              I am in immediate danger
+            </button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-not-safe-telling" class="flow-panel">
+        <div class="card">
+          <h2>Your safety comes first</h2>
+          <p>
+            You do not have to confront the unsafe person or tell them about your
+            plan. If possible, move toward a safer place and contact a trusted
+            adult or trained service.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showFlow('danger')">
+              I may be in immediate danger
+            </button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-danger" class="flow-panel">
+        <div class="card danger-card">
+          <h2>Immediate safety</h2>
+          <p>
+            If someone is in immediate danger, move to a safer place if you can do
+            so safely and contact the appropriate local emergency or
+            child-protection service.
+          </p>
+          <p>
+            Pakistan prototype references: child protection <strong>1121</strong>;
+            emergency support <strong>112</strong>. Verify all contacts before any
+            real deployment.
+          </p>
+
+          <div class="flow-buttons">
+            <button onclick="showSection('trained')">See all verified helplines</button>
+            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
+            <button onclick="showSection('home')">Back to start</button>
+          </div>
+        </div>
       </div>
     </div>
     <div id="urgent" class="section">
@@ -288,13 +760,58 @@
         view.style.display = 'none';
       });
     }
+    function hideSafetyFlow() {
+      document.querySelectorAll(".flow-panel").forEach(panel => {
+        panel.classList.remove("active");
+      });
+    }
+    function showFlow(flowId) {
+      hideAllResources();
+      hideSafetyFlow();
+
+      const panel = document.getElementById("flow-" + flowId);
+
+      if (panel) {
+        panel.classList.add("active");
+        panel.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
     function showSection(id) {
       hideAllResources();
+      hideSafetyFlow();
+
       document.querySelectorAll('.section').forEach(sec => {
         sec.classList.remove('active');
       });
-      document.getElementById(id).classList.add('active');
+
+      const section = document.getElementById(id);
+
+      if (section) {
+        section.classList.add('active');
+      }
+
       window.scrollTo(0, 0);
+    }
+    function openSafeChat() {
+      const chat = document.querySelector(".safechat-container");
+
+      if (chat) {
+        chat.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        const input = document.getElementById("safechat-input");
+
+        if (input) {
+          input.focus();
+        }
+      } else {
+        alert("The SafeVoice Helper is not available yet.");
+      }
     }
     function showResource(resId) {
       document.getElementById(resId).style.display = 'block';

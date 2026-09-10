@@ -167,3 +167,53 @@ a:hover {
 .safechat-helplines strong {
   color: var(--sv-text);
 }
+
+/* SafeVoice guided safety flow */
+
+.safety-intro {
+  border-top: 4px solid var(--sv-primary);
+}
+
+.flow-panel {
+  display: none;
+}
+
+.flow-panel.active {
+  display: block;
+}
+
+.flow-buttons {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.flow-note {
+  padding: 10px 12px;
+  border-left: 4px solid var(--sv-accent);
+  background: #ecfeff;
+  color: var(--sv-text);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.danger-card {
+  border-color: var(--sv-danger);
+  background: #fff7f7;
+}
+
+.choice-help {
+  color: var(--sv-text-muted);
+  font-size: 13px;
+}
+
+.direct-menu {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--sv-border);
+}
+
+.direct-menu h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
