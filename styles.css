@@ -72,3 +72,98 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* ==== SafeVoice SafeChat Box ==== */
+
+.safechat-container {
+  max-width: 700px;
+  margin: 24px auto 0;
+  border: 1px solid var(--sv-border);
+  border-radius: var(--sv-radius-md);
+  background: var(--sv-surface);
+  box-shadow: var(--sv-shadow-sm);
+  padding: 16px;
+  font-family: var(--sv-font-family);
+}
+
+.safechat-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--sv-text);
+}
+
+.safechat-subtitle {
+  font-size: 13px;
+  color: var(--sv-text-muted);
+  margin-bottom: 12px;
+}
+
+.safechat-messages {
+  border: 1px solid var(--sv-border);
+  border-radius: var(--sv-radius-sm);
+  padding: 12px;
+  height: 220px;
+  overflow-y: auto;
+  background: var(--sv-bg);
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.safechat-message {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.safechat-message.bot {
+  color: var(--sv-text);
+}
+
+.safechat-message.user {
+  color: var(--sv-text);
+  font-style: italic;
+}
+
+.safechat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.safechat-input-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--sv-border);
+  border-radius: var(--sv-radius-sm);
+  font-size: 14px;
+  font-family: var(--sv-font-family);
+  background: var(--sv-surface);
+  color: var(--sv-text);
+}
+
+.safechat-input-row button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: var(--sv-radius-sm);
+  background: var(--sv-primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--sv-font-family);
+}
+
+.safechat-input-row button:hover {
+  background: var(--sv-primary-dark);
+}
+
+.safechat-helplines {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--sv-text-muted);
+  border-top: 1px solid var(--sv-border);
+  padding-top: 8px;
+}
+
+.safechat-helplines strong {
+  color: var(--sv-text);
+}

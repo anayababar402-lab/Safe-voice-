@@ -258,6 +258,30 @@
     </div>
     <footer>SafeVoice — demonstration prototype. Not an emergency service. Does not collect or store real data.</footer>
   </div>
+
+  <!-- SafeChat Box -->
+  <div class="safechat-container">
+    <div class="safechat-title">SafeVoice Helper</div>
+    <div class="safechat-subtitle">
+      This is an automated helper, not a human and not an emergency service. If you are in immediate danger, contact a trusted adult or call a helpline.
+    </div>
+
+    <div id="safechat-messages" class="safechat-messages">
+      <!-- messages will appear here -->
+    </div>
+
+    <form id="safechat-form" class="safechat-input-row">
+      <input id="safechat-input" type="text" placeholder="Type your message here..." />
+      <button type="submit">Send</button>
+    </form>
+
+    <div class="safechat-helplines">
+      <strong>Helplines (Pakistan):</strong><br>
+      Child protection: 1121 • Emergency: 112 • FIA Cyber Crime: 1991 • Digital Rights Foundation: 0800-39393
+    </div>
+  </div>
+
+  <script src="safechat.js"></script>
   <script>
     function hideAllResources() {
       document.querySelectorAll('.resource-view').forEach(view => {
