@@ -95,7 +95,17 @@
     <header>
       <h1>SafeVoice</h1>
       <p>A safe first step toward trustworthy help</p>
+      <button id="existButton" class="exist-button">Exist</button>
     </header>
+
+    <section id="existBox" class="exist-box" hidden>
+      <h2>You are here.</h2>
+      <p id="existInstruction">
+        Take one slow breath. You do not have to solve everything at once.
+      </p>
+      <button id="startGrounding">Start grounding exercise</button>
+    </section>
+
     <div class="demo-banner">
       <strong>PROTOTYPE MODE – IMPORTANT</strong>
       This is a demonstration prototype. It does not contact counselors, police, emergency services, or child-protection agencies. Do not enter real names, passwords, addresses, phone numbers, images, or detailed information about abuse.
@@ -753,6 +763,36 @@
     </div>
   </div>
 
+  <!-- AI-powered SafeVoice Chat (requires separate backend deployment — see note in code) -->
+  <button id="openChat" class="chat-launcher">Talk to SafeVoice</button>
+
+  <section id="chatbot" class="chatbot" hidden>
+    <header class="chat-header">
+      <div>
+        <strong>SafeVoice</strong>
+        <small>Private support assistant</small>
+      </div>
+      <button id="closeChat" class="icon-button" aria-label="Close chatbot">×</button>
+    </header>
+
+    <div id="chatMessages" class="chat-messages" aria-live="polite">
+      <div class="message bot">
+        Hi, I'm SafeVoice. You can talk to me without being judged. What's happening?
+      </div>
+    </div>
+
+    <form id="chatForm" class="chat-form">
+      <input
+        id="chatInput"
+        type="text"
+        placeholder="Write a message..."
+        maxlength="1000"
+        required
+      />
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
   <script src="safechat.js"></script>
   <script>
     function hideAllResources() {
@@ -820,6 +860,122 @@
     function hideResource(resId) {
       document.getElementById(resId).style.display = 'none';
     }
+  </script>
+
+  <script>
+    // ==== AI-powered SafeVoice Chat ====
+    // IMPORTANT: GitHub Pages only serves static files. The endpoint below
+    // must point to your own separately-deployed backend (see server.mjs).
+    // Replace this with your real backend URL once deployed, e.g.
+    // "https://your-app-name.onrender.com/api/chat"
+    const CHAT_API_ENDPOINT = "https://safevoice-server-59yy.onrender.com/api/chat";
+
+    const openChat = document.getElementById("openChat");
+    const closeChat = document.getElementById("closeChat");
+    const chatbot = document.getElementById("chatbot");
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+    const chatMessages = document.getElementById("chatMessages");
+
+    const conversation = [];
+
+    function addChatMessage(text, sender) {
+      const message = document.createElement("div");
+      message.className = `message ${sender}`;
+      message.textContent = text;
+      chatMessages.appendChild(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return message;
+    }
+
+    openChat.addEventListener("click", () => {
+      chatbot.hidden = false;
+      openChat.hidden = true;
+      chatInput.focus();
+    });
+
+    closeChat.addEventListener("click", () => {
+      chatbot.hidden = true;
+      openChat.hidden = false;
+    });
+
+    chatForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      addChatMessage(text, "user");
+      conversation.push({ role: "user", content: text });
+
+      chatInput.value = "";
+      chatInput.disabled = true;
+
+      const typingMessage = addChatMessage("Thinking...", "bot");
+
+      try {
+        const response = await fetch(CHAT_API_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: conversation })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Chat request failed.");
+        }
+
+        typingMessage.textContent = data.reply;
+        conversation.push({ role: "assistant", content: data.reply });
+      } catch (error) {
+        console.error(error);
+        typingMessage.textContent =
+          "I'm having trouble connecting. Please try again in a moment.";
+      } finally {
+        chatInput.disabled = false;
+        chatInput.focus();
+      }
+    });
+
+    // ==== Exist grounding button ====
+    const existButton = document.getElementById("existButton");
+    const existBox = document.getElementById("existBox");
+    const startGrounding = document.getElementById("startGrounding");
+    const existInstruction = document.getElementById("existInstruction");
+
+    existButton.addEventListener("click", () => {
+      existBox.hidden = !existBox.hidden;
+
+      if (!existBox.hidden) {
+        existBox.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
+    });
+
+    startGrounding.addEventListener("click", async () => {
+      startGrounding.disabled = true;
+
+      const steps = [
+        ["Breathe in slowly.", 4000],
+        ["Hold your breath gently.", 4000],
+        ["Breathe out slowly.", 6000],
+        ["Notice one thing you can see.", 3500],
+        ["Notice one thing you can hear.", 3500],
+        ["Choose one safe next step.", 3500]
+      ];
+
+      for (const [instruction, duration] of steps) {
+        existInstruction.textContent = instruction;
+        await new Promise(resolve => setTimeout(resolve, duration));
+      }
+
+      existInstruction.textContent =
+        "You made it through the exercise. You can repeat it or talk to SafeVoice.";
+      startGrounding.disabled = false;
+    });
   </script>
 </body>
 </html>
