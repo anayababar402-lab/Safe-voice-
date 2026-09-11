@@ -217,3 +217,170 @@ a:hover {
   font-size: 17px;
   margin-bottom: 6px;
 }
+
+/* ==== AI-powered SafeVoice Chat ==== */
+
+.chat-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 30px;
+  color: white;
+  background: #176b87;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot {
+  position: fixed;
+  right: 24px;
+  bottom: 85px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  height: 520px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.chatbot[hidden] {
+  display: none;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  color: white;
+  background: #176b87;
+}
+
+.chat-header small {
+  display: block;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+.icon-button {
+  border: 0;
+  color: white;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background: #f2f8fa;
+}
+
+.message {
+  max-width: 85%;
+  margin: 0 0 12px;
+  padding: 11px 14px;
+  border-radius: 15px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.message.bot {
+  color: #173b48;
+  background: #dceff3;
+}
+
+.message.user {
+  margin-left: auto;
+  color: white;
+  background: #176b87;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #dce1e3;
+}
+
+.chat-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 11px;
+  border: 1px solid #bbc8cc;
+  border-radius: 10px;
+  outline: none;
+}
+
+.chat-form button {
+  border: 0;
+  border-radius: 10px;
+  padding: 0 14px;
+  color: white;
+  background: #176b87;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .chatbot {
+    right: 16px;
+    bottom: 78px;
+    width: calc(100vw - 32px);
+  }
+
+  .chat-launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* ==== Exist grounding button ==== */
+
+.exist-button {
+  margin-top: 14px;
+  padding: 13px 28px;
+  border: 0;
+  border-radius: 28px;
+  color: white;
+  background: #7c3aed;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.exist-box {
+  max-width: 430px;
+  margin: 20px auto;
+  padding: 24px;
+  border-radius: 20px;
+  color: #30204a;
+  background: #f0eaff;
+  text-align: center;
+}
+
+.exist-box[hidden] {
+  display: none;
+}
+
+.exist-box button {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background: #6d28d9;
+  cursor: pointer;
+}
+
+#existInstruction {
+  min-height: 48px;
+  line-height: 1.5;
+}
