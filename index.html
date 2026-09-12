@@ -763,27 +763,22 @@
     </div>
   </div>
 
-  <!-- AI-powered SafeVoice Chat (requires separate backend deployment — see note in code) -->
-  <button id="openChat" class="chat-launcher">Talk to SafeVoice</button>
+  <!-- AI-powered SafeVoice Chat — inline (not fixed position) to avoid mobile keyboard/viewport conflicts -->
+  <div class="safechat-container">
+    <div class="safechat-title">SafeVoice AI Chat</div>
+    <div class="safechat-subtitle">
+      This is an AI-powered helper, not a human and not an emergency service. If you are in immediate danger, contact a trusted adult or call a helpline.
+    </div>
 
-  <section id="chatbot" class="chatbot" hidden>
-    <header class="chat-header">
-      <div>
-        <strong>SafeVoice</strong>
-        <small>Private support assistant</small>
-      </div>
-      <button id="closeChat" class="icon-button" aria-label="Close chatbot">×</button>
-    </header>
-
-    <div id="chatMessages" class="chat-messages" aria-live="polite">
-      <div class="message bot">
+    <div id="ai-chat-messages" class="safechat-messages" aria-live="polite">
+      <div class="safechat-message bot">
         Hi, I'm SafeVoice. You can talk to me without being judged. What's happening?
       </div>
     </div>
 
-    <form id="chatForm" class="chat-form">
+    <form id="ai-chat-form" class="safechat-input-row">
       <input
-        id="sv-chat-msg-2026"
+        id="ai-chat-input"
         type="text"
         placeholder="Write a message..."
         maxlength="1000"
@@ -795,7 +790,7 @@
       />
       <button type="submit">Send</button>
     </form>
-  </section>
+  </div>
 
   <script src="safechat.js"></script>
   <script>
@@ -867,61 +862,62 @@
   </script>
 
   <script>
-    // ==== AI-powered SafeVoice Chat ====
-    // IMPORTANT: GitHub Pages only serves static files. The endpoint below
-    // must point to your own separately-deployed backend (see server.mjs).
-    // Replace this with your real backend URL once deployed, e.g.
-    // "https://your-app-name.onrender.com/api/chat"
-    const CHAT_API_ENDPOINT = "https://safevoice-server-59yy.onrender.com/api/chat";
+    // ==== AI-powered SafeVoice Chat (v2 — inline layout + composition guard) ====
+    // GitHub Pages only serves static files. This points to your separately
+    // deployed backend (see server.mjs). Update if you redeploy elsewhere.
+    const AI_CHAT_API_ENDPOINT = "https://safevoice-server-59yy.onrender.com/api/chat";
 
-    const openChat = document.getElementById("openChat");
-    const closeChat = document.getElementById("closeChat");
-    const chatbot = document.getElementById("chatbot");
-    const chatForm = document.getElementById("chatForm");
-    const chatInput = document.getElementById("sv-chat-msg-2026");
-    const chatMessages = document.getElementById("chatMessages");
+    const aiChatForm = document.getElementById("ai-chat-form");
+    const aiChatInput = document.getElementById("ai-chat-input");
+    const aiChatMessages = document.getElementById("ai-chat-messages");
 
-    const conversation = [];
+    const aiConversation = [];
+    let aiInputIsComposing = false;
 
-    function addChatMessage(text, sender) {
-      const message = document.createElement("div");
-      message.className = `message ${sender}`;
-      message.textContent = text;
-      chatMessages.appendChild(message);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      return message;
+    // Guards against grabbing a half-finished word from the keyboard's
+    // predictive/autocorrect engine — only read the field once composition
+    // has fully settled.
+    aiChatInput.addEventListener("compositionstart", () => {
+      aiInputIsComposing = true;
+    });
+    aiChatInput.addEventListener("compositionend", () => {
+      aiInputIsComposing = false;
+    });
+
+    function addAiMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = "safechat-message " + sender;
+      div.textContent = text;
+      aiChatMessages.appendChild(div);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      return div;
     }
 
-    openChat.addEventListener("click", () => {
-      chatbot.hidden = false;
-      openChat.hidden = true;
-      chatInput.focus();
-    });
-
-    closeChat.addEventListener("click", () => {
-      chatbot.hidden = true;
-      openChat.hidden = false;
-    });
-
-    chatForm.addEventListener("submit", async (event) => {
+    aiChatForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const text = chatInput.value.trim();
+      // If the keyboard is still mid-composition, wait a moment and let
+      // the browser finish before reading the field's real value.
+      if (aiInputIsComposing) {
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
+      const text = aiChatInput.value.trim();
       if (!text) return;
 
-      addChatMessage(text, "user");
-      conversation.push({ role: "user", content: text });
+      addAiMessage(text, "user");
+      aiConversation.push({ role: "user", content: text });
 
-      chatInput.value = "";
-      chatInput.disabled = true;
+      aiChatInput.value = "";
+      aiChatInput.disabled = true;
 
-      const typingMessage = addChatMessage("Thinking...", "bot");
+      const typingMessage = addAiMessage("Thinking...", "bot");
 
       try {
-        const response = await fetch(CHAT_API_ENDPOINT, {
+        const response = await fetch(AI_CHAT_API_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: conversation })
+          body: JSON.stringify({ messages: aiConversation })
         });
 
         const data = await response.json();
@@ -931,17 +927,19 @@
         }
 
         typingMessage.textContent = data.reply;
-        conversation.push({ role: "assistant", content: data.reply });
+        aiConversation.push({ role: "assistant", content: data.reply });
       } catch (error) {
         console.error(error);
         typingMessage.textContent =
           "I'm having trouble connecting. Please try again in a moment.";
       } finally {
-        chatInput.disabled = false;
-        chatInput.focus();
+        aiChatInput.disabled = false;
+        aiChatInput.focus();
       }
     });
+  </script>
 
+  <script>
     // ==== Exist grounding button ====
     const existButton = document.getElementById("existButton");
     const existBox = document.getElementById("existBox");
