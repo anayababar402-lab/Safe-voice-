@@ -753,7 +753,7 @@
     </div>
 
     <form id="safechat-form" class="safechat-input-row">
-      <input id="safechat-input" type="text" placeholder="Type your message here..." />
+      <input id="sv-helper-msg-2026" type="text" placeholder="Type your message here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
       <button type="submit">Send</button>
     </form>
 
@@ -783,10 +783,14 @@
 
     <form id="chatForm" class="chat-form">
       <input
-        id="chatInput"
+        id="sv-chat-msg-2026"
         type="text"
         placeholder="Write a message..."
         maxlength="1000"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
         required
       />
       <button type="submit">Send</button>
@@ -844,7 +848,7 @@
           block: "start"
         });
 
-        const input = document.getElementById("safechat-input");
+        const input = document.getElementById("sv-helper-msg-2026");
 
         if (input) {
           input.focus();
@@ -874,7 +878,7 @@
     const closeChat = document.getElementById("closeChat");
     const chatbot = document.getElementById("chatbot");
     const chatForm = document.getElementById("chatForm");
-    const chatInput = document.getElementById("chatInput");
+    const chatInput = document.getElementById("sv-chat-msg-2026");
     const chatMessages = document.getElementById("chatMessages");
 
     const conversation = [];
