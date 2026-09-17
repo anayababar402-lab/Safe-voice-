@@ -2,982 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SafeVoice — A safe first step toward trustworthy help</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Layout & section behavior for SafeVoice */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 24px 16px 48px;
-    }
-
-    header { text-align: center; margin-bottom: 24px; }
-    header h1 { font-size: 28px; margin: 0 0 4px; }
-    header p { margin: 0; font-size: 14px; }
-
-    .demo-banner {
-      background: #fff7ed;
-      border: 1px solid #fdba74;
-      color: #9a3412;
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-    .demo-banner strong { display: block; margin-bottom: 4px; font-size: 14px; }
-
-    .card {
-      background: var(--sv-surface);
-      border: 1px solid var(--sv-border);
-      border-radius: var(--sv-radius-md);
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: var(--sv-shadow-sm);
-    }
-    .card h2 { font-size: 20px; margin: 0 0 10px; }
-    .card p { margin: 0 0 10px; font-size: 14px; }
-    .card ul { margin: 0 0 10px 18px; padding: 0; font-size: 14px; }
-    .card .muted { color: var(--sv-text-muted); font-size: 13px; }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    @media (min-width: 600px) {
-      .menu-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    button {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--sv-border);
-      background: var(--sv-surface);
-      border-radius: 8px;
-      font-size: 14px;
-      color: var(--sv-text);
-      cursor: pointer;
-      text-align: left;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    button:hover {
-      border-color: var(--sv-primary);
-      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
-    }
-
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .back-row { display: flex; gap: 10px; margin-top: 14px; }
-    .back-row button { width: auto; }
-
-    .danger-note {
-      color: var(--sv-danger);
-      font-weight: 600;
-      font-size: 13px;
-      margin-top: 6px;
-    }
-
-    footer {
-      margin-top: 28px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--sv-text-muted);
-    }
-
-    .resource-view { display: none; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SafeVoice - A secure, confidential youth safety and support platform." />
+  <title>SafeVoice | Youth Safety &amp; Support</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>SafeVoice</h1>
-      <p>A safe first step toward trustworthy help</p>
-      <button id="existButton" class="exist-button">Exist</button>
-    </header>
 
-    <section id="existBox" class="exist-box" hidden>
-      <h2>You are here.</h2>
-      <p id="existInstruction">
-        Take one slow breath. You do not have to solve everything at once.
-      </p>
-      <button id="startGrounding">Start grounding exercise</button>
+  <!-- Quick Emergency Exit Bar -->
+  <aside class="quick-exit-bar" aria-label="Emergency quick exit">
+    <div class="container exit-flex">
+      <span>Need to leave quickly? Pressing Quick Exit clears this page immediately.</span>
+      <button id="quickExitBtn" class="btn btn-exit" type="button">⚡ Quick Exit</button>
+    </div>
+  </aside>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container header-flex">
+      <a href="#hero" class="brand">
+        <span class="brand-shield" aria-hidden="true">🛡️</span>
+        <span class="brand-name">SafeVoice</span>
+      </a>
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="#about">About</a>
+        <a href="#resources">Safety Tools</a>
+        <a href="#grounding">Grounding</a>
+        <a href="#helplines">Helplines</a>
+        <button id="navOpenChatBtn" class="btn btn-outline" type="button">Assistant</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-content">
+        <span class="badge">Confidential &amp; Private Space</span>
+        <h1 class="hero-title">
+          Your Voice Matters.<br />
+          <span class="gradient-text">You Are Never Alone.</span>
+        </h1>
+        <p class="hero-subtitle">
+          SafeVoice provides immediate guidance, mental grounding, and verified resources for young people facing bullying, anxiety, or online harassment.
+        </p>
+        <div class="hero-actions">
+          <button id="heroOpenChatBtn" class="btn btn-primary" type="button">
+            💬 Talk to SafeVoice
+          </button>
+          <a href="#grounding" class="btn btn-secondary">Try Grounding Tool</a>
+        </div>
+      </div>
     </section>
 
-    <div class="demo-banner">
-      <strong>PROTOTYPE MODE – IMPORTANT</strong>
-      This is a demonstration prototype. It does not contact counselors, police, emergency services, or child-protection agencies. Do not enter real names, passwords, addresses, phone numbers, images, or detailed information about abuse.
+    <!-- Core Safety Features -->
+    <section class="section" id="resources">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Safety &amp; Support Tools</h2>
+          <p>Practical steps and immediate assistance when you need it most.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="feature-card">
+            <div class="card-icon" aria-hidden="true">🔒</div>
+            <h3>Privacy First</h3>
+            <p>No login or personal tracking required. Access tools and talk to the assistant with complete anonymity.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon" aria-hidden="true">📱</div>
+            <h3>Cyber Safety Tips</h3>
+            <p>Learn how to preserve digital evidence, secure your social accounts, and report threats without escalating conflict.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="card-icon" aria-hidden="true">🤝</div>
+            <h3>Community Guidance</h3>
+            <p>Guidance on how to safely approach trusted teachers, family members, or counselors about ongoing challenges.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grounding / Exist Interactive Section -->
+    <section class="section section-alt" id="grounding">
+      <div class="container">
+        <div class="grounding-card">
+          <div class="grounding-header">
+            <span class="badge badge-accent">Interactive Grounding</span>
+            <h2>Take a Moment to Exist</h2>
+            <p>When thoughts feel overwhelming, steady breathing and physical grounding help reset your focus.</p>
+          </div>
+
+          <div class="grounding-visual" aria-hidden="true">
+            <div id="groundingCircle" class="pulse-circle"></div>
+          </div>
+
+          <div class="grounding-display">
+            <p id="groundingInstruction">Click below to start a 5-step guided calming exercise.</p>
+          </div>
+
+          <div class="grounding-controls">
+            <button id="startGroundingBtn" class="btn btn-primary" type="button">Start Exercise</button>
+            <button id="resetGroundingBtn" class="btn btn-outline" type="button" disabled>Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Helplines Directory -->
+    <section class="section" id="helplines">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Emergency &amp; Support Contacts</h2>
+          <p>Verified hotlines available across Pakistan when you need direct human assistance.</p>
+        </div>
+
+        <div class="helpline-grid">
+          <article class="helpline-card">
+            <h4>Police Emergency</h4>
+            <a href="tel:15" class="helpline-number">15</a>
+            <small>Pakistan Police Immediate Emergency Dispatch</small>
+          </article>
+
+          <article class="helpline-card">
+            <h4>FIA Cyber Crime Helpline</h4>
+            <a href="tel:1991" class="helpline-number">1991</a>
+            <small>Direct reporting for online harassment, blackmail, and unauthorized access</small>
+          </article>
+
+          <article class="helpline-card">
+            <h4>Mental Health Helpline (Umang)</h4>
+            <a href="tel:03117786264" class="helpline-number">0311-7786264</a>
+            <small>24/7 Confidential psychological first aid &amp; emotional support</small>
+          </article>
+
+          <article class="helpline-card">
+            <h4>Child Protection Bureau</h4>
+            <a href="tel:1121" class="helpline-number">1121</a>
+            <small>Official rescue &amp; protection services for children and minors</small>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 SafeVoice. Built for youth safety, privacy, and accessibility.</p>
+      <p class="disclaimer">SafeVoice provides educational guidance and immediate calming tools. If you or someone you know is in immediate physical danger, call local emergency authorities immediately.</p>
     </div>
-    <div id="home" class="section active">
-      <div class="card safety-intro">
-        <h2>You're welcome here</h2>
+  </footer>
 
-        <p>
-          You do not have to share names, addresses, phone numbers, passwords,
-          photos, or detailed information.
-        </p>
+  <!-- ================================================================= -->
+  <!-- SINGLE UNIFIED CHATBOT COMPONENT                                  -->
+  <!-- ================================================================= -->
+  <div id="safevoiceChatWidget" class="chat-widget">
+    <!-- Floating Launcher Button -->
+    <button id="chatToggleLauncher" class="chat-launcher" type="button" aria-label="Open SafeVoice Chatbot">
+      <span class="launcher-icon" aria-hidden="true">💬</span>
+      <span class="launcher-text">Talk to SafeVoice</span>
+    </button>
 
-        <p>
-          Are you feeling unsafe, being hurt, threatened, or pressured by someone?
-        </p>
-
-        <div class="flow-buttons">
-          <button onclick="showFlow('concerned')">Yes, I need help</button>
-          <button onclick="showFlow('information')">No, I'm here for information</button>
-          <button onclick="showFlow('unsure')">I'm not sure</button>
-        </div>
-
-        <div class="flow-note">
-          SafeVoice is a demonstration prototype. It is not a human, emergency
-          service, counsellor, investigator, or reporting service.
-        </div>
-
-        <div class="direct-menu">
-          <h3>Browse SafeVoice directly</h3>
-          <p class="choice-help">
-            You can also open any section without completing the guided questions.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showSection('urgent')">
-              I Need Help Now
-            </button>
-
-            <button onclick="showSection('trained')">
-              Get verified help
-            </button>
-
-            <button onclick="showSection('report')">
-              Report Something Safely
-            </button>
-
-            <button onclick="showSection('resources')">
-              Safety Resource Library
-            </button>
-
-            <button onclick="showSection('community')">
-              Community Support, Moderated
-            </button>
-
-            <button onclick="showSection('about')">
-              About SafeVoice
-            </button>
+    <!-- Chat Modal Window -->
+    <section id="chatWindow" class="chat-window" aria-labelledby="chatHeading" hidden>
+      <header class="chat-window-header">
+        <div class="chat-header-info">
+          <div class="status-indicator" aria-hidden="true"></div>
+          <div>
+            <h2 id="chatHeading" class="chat-title">SafeVoice Assistant</h2>
+            <span class="chat-status-text">Confidential &amp; Private</span>
           </div>
         </div>
-      </div>
+        <button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close Chat">&times;</button>
+      </header>
 
-      <div id="flow-concerned" class="flow-panel">
-        <div class="card">
-          <h2>Who are you seeking help for?</h2>
-          <p>Choose the option that fits best. You can continue without sharing details.</p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('concern-type-myself')">Myself</button>
-            <button onclick="showFlow('concern-type-child')">My child or a young person</button>
-            <button onclick="showFlow('concern-type-student')">A student I support</button>
-            <button onclick="showFlow('concern-type-friend')">A friend or sibling</button>
-            <button onclick="showFlow('concern-type-other')">Someone else</button>
-            <button onclick="showFlow('unsure')">I'm not sure</button>
-          </div>
+      <!-- Message History List -->
+      <div id="chatMessagesList" class="chat-messages" role="log" aria-live="polite">
+        <div class="chat-bubble bot-bubble">
+          <p>Hi, I'm the SafeVoice assistant. I'm here to listen, share safety tips, and guide you through difficult moments. What's on your mind?</p>
+          <time class="bubble-time">Just now</time>
         </div>
       </div>
 
-      <div id="flow-information" class="flow-panel">
-        <div class="card">
-          <h2>Information and safety resources</h2>
-          <p>
-            You can learn about safety without sharing personal information.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showSection('resources')">
-              Open Safety Resource Library
-            </button>
-            <button onclick="showSection('about')">Learn about SafeVoice</button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-unsure" class="flow-panel">
-        <div class="card">
-          <h2>It's okay not to be sure</h2>
-          <p>
-            You do not need to label what is happening. If someone makes you feel
-            unsafe, pressured, threatened, or hurt, you deserve support.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('concern-type-myself')">I want help</button>
-            <button onclick="showSection('resources')">
-              Read safety information
-            </button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-concern-type-myself" class="flow-panel">
-        <div class="card">
-          <h2>What kind of safety concern is this?</h2>
-          <p>
-            Choose one or more broad options. You do not need to explain what
-            happened.
-          </p>
-
-          <p class="choice-help">
-            Do not enter names, addresses, phone numbers, passwords, images, or
-            detailed descriptions.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('myself')">
-              Someone is hurting me physically
-            </button>
-            <button onclick="showFlow('myself')">
-              Someone is threatening or blackmailing me
-            </button>
-            <button onclick="showFlow('myself')">
-              Something harmful happened online
-            </button>
-            <button onclick="showFlow('myself')">
-              Someone is pressuring or exploiting me
-            </button>
-            <button onclick="showFlow('myself')">
-              Bullying or harassment
-            </button>
-            <button onclick="showFlow('myself')">I'm not sure</button>
-            <button onclick="showFlow('myself')">I don't want to say</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-concern-type-child" class="flow-panel">
-        <div class="card">
-          <h2>What kind of safety concern is involved?</h2>
-          <p>
-            Choose a broad category only. Do not investigate or ask the child to
-            repeat details.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('child')">Physical harm</button>
-            <button onclick="showFlow('child')">Threats or blackmail</button>
-            <button onclick="showFlow('child')">Online harm</button>
-            <button onclick="showFlow('child')">Bullying or harassment</button>
-            <button onclick="showFlow('child')">I'm not sure</button>
-            <button onclick="showFlow('child')">I don't want to say</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-concern-type-student" class="flow-panel">
-        <div class="card">
-          <h2>What kind of safety concern is involved?</h2>
-          <p>
-            Choose a broad category only. Follow your school or organisation's
-            safeguarding procedure.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('student')">Physical harm</button>
-            <button onclick="showFlow('student')">Threats or blackmail</button>
-            <button onclick="showFlow('student')">Online harm</button>
-            <button onclick="showFlow('student')">Bullying or harassment</button>
-            <button onclick="showFlow('student')">I'm not sure</button>
-            <button onclick="showFlow('student')">I don't want to say</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-concern-type-friend" class="flow-panel">
-        <div class="card">
-          <h2>What kind of safety concern is involved?</h2>
-          <p>
-            Focus on safety. Do not investigate or confront the person causing
-            harm.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('friend')">Physical harm</button>
-            <button onclick="showFlow('friend')">Threats or blackmail</button>
-            <button onclick="showFlow('friend')">Online harm</button>
-            <button onclick="showFlow('friend')">Bullying or harassment</button>
-            <button onclick="showFlow('friend')">I'm not sure</button>
-            <button onclick="showFlow('friend')">I don't want to say</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-concern-type-other" class="flow-panel">
-        <div class="card">
-          <h2>What kind of safety concern is involved?</h2>
-          <p>
-            Choose a broad category only. The purpose is to offer general guidance,
-            not to investigate.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('other')">Physical harm</button>
-            <button onclick="showFlow('other')">Threats or blackmail</button>
-            <button onclick="showFlow('other')">Online harm</button>
-            <button onclick="showFlow('other')">Bullying or harassment</button>
-            <button onclick="showFlow('other')">I'm not sure</button>
-            <button onclick="showFlow('other')">I don't want to say</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-myself" class="flow-panel">
-        <div class="card">
-          <h2>Have you told a safe person yet?</h2>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('told-helping')">
-              Yes, and they are helping
-            </button>
-            <button onclick="showFlow('told-not-helping')">
-              I tried, but I was not believed
-            </button>
-            <button onclick="showFlow('not-told')">
-              No, I have not told anyone
-            </button>
-            <button onclick="showFlow('not-safe-telling')">
-              I do not feel safe telling anyone
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-child" class="flow-panel">
-        <div class="card">
-          <h2>Has the young person told a safe person?</h2>
-          <p>
-            Listen calmly. Do not investigate, blame, promise secrecy, or make
-            them repeat the story.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('told-helping')">
-              Yes, and someone is helping
-            </button>
-            <button onclick="showFlow('not-told')">
-              No, no one has been told
-            </button>
-            <button onclick="showFlow('not-safe-telling')">
-              They may not be safe telling someone
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-student" class="flow-panel">
-        <div class="card">
-          <h2>Has the student told a safe person?</h2>
-          <p>
-            Listen calmly and follow your school or organisation's safeguarding
-            procedure.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('told-helping')">
-              Yes, and someone is helping
-            </button>
-            <button onclick="showFlow('not-told')">
-              No, no one has been told
-            </button>
-            <button onclick="showFlow('not-safe-telling')">
-              The student may be in immediate danger
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-friend" class="flow-panel">
-        <div class="card">
-          <h2>Has your friend or sibling told a safe person?</h2>
-          <p>
-            Listen and encourage safe adult support. Do not investigate or confront
-            anyone alone.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('told-helping')">
-              Yes, and someone is helping
-            </button>
-            <button onclick="showFlow('not-told')">
-              No, no one has been told
-            </button>
-            <button onclick="showFlow('not-safe-telling')">
-              They may not be safe right now
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-other" class="flow-panel">
-        <div class="card">
-          <h2>Choose the safest next step</h2>
-          <p>
-            Focus on immediate safety and contact an appropriate trusted adult,
-            child-protection service, or emergency service.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('told-helping')">
-              Someone is already helping
-            </button>
-            <button onclick="showFlow('not-told')">
-              No one has been told
-            </button>
-            <button onclick="showFlow('not-safe-telling')">
-              There may be immediate danger
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-told-helping" class="flow-panel">
-        <div class="card">
-          <h2>I'm glad you reached out</h2>
-          <p>
-            You do not need to repeat everything here. Stay connected with the safe
-            person who is helping.
-          </p>
-          <p>
-            If the situation remains unsafe or they could not help, choose another
-            trusted adult or trained service.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('danger')">I still feel unsafe</button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-told-not-helping" class="flow-panel">
-        <div class="card">
-          <h2>You deserve to be taken seriously</h2>
-          <p>
-            Not being believed does not mean it was your fault. If it is safe, try
-            another trusted adult or trained service.
-          </p>
-          <p>
-            You can say: "I told someone before, but I still need help and I was
-            not taken seriously."
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('danger')">I still feel unsafe</button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-not-told" class="flow-panel">
-        <div class="card">
-          <h2>You can start with one safe person</h2>
-          <p>
-            If it is safe, consider telling a trusted adult, such as a parent,
-            relative, teacher, school counsellor, doctor, or child-protection
-            professional.
-          </p>
-          <p>
-            You can begin with:
-            <em>"Something is happening and I don't feel safe. I need help."</em>
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('can-tell')">
-              I can tell someone today
-            </button>
-            <button onclick="showFlow('scared-telling')">
-              I'm scared to tell someone
-            </button>
-            <button onclick="showFlow('no-one')">
-              I don't know whom to tell
-            </button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-can-tell" class="flow-panel">
-        <div class="card">
-          <h2>That is a strong next step</h2>
-          <p>
-            You can speak, write a message, or show a safe adult this page. Choose
-            someone who is not connected to the person causing harm.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-scared-telling" class="flow-panel">
-        <div class="card">
-          <h2>You can take a smaller step</h2>
-          <p>
-            You can write a message instead of saying it aloud. Choose a safe adult
-            who is not connected to the person causing harm.
-          </p>
-          <p>Do not confront the person causing harm alone.</p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('no-one')">
-              I don't know whom to tell
-            </button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showFlow('danger')">
-              I am in immediate danger
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-no-one" class="flow-panel">
-        <div class="card">
-          <h2>You deserve help</h2>
-          <p>
-            Think of a safe adult who may listen: a relative, teacher, school
-            counsellor, doctor, or child-protection professional.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showFlow('danger')">
-              I am in immediate danger
-            </button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-not-safe-telling" class="flow-panel">
-        <div class="card">
-          <h2>Your safety comes first</h2>
-          <p>
-            You do not have to confront the unsafe person or tell them about your
-            plan. If possible, move toward a safer place and contact a trusted
-            adult or trained service.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showFlow('danger')">
-              I may be in immediate danger
-            </button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="flow-danger" class="flow-panel">
-        <div class="card danger-card">
-          <h2>Immediate safety</h2>
-          <p>
-            If someone is in immediate danger, move to a safer place if you can do
-            so safely and contact the appropriate local emergency or
-            child-protection service.
-          </p>
-          <p>
-            Pakistan prototype references: child protection <strong>1121</strong>;
-            emergency support <strong>112</strong>. Verify all contacts before any
-            real deployment.
-          </p>
-
-          <div class="flow-buttons">
-            <button onclick="showSection('trained')">See all verified helplines</button>
-            <button onclick="openSafeChat()">Open SafeVoice Helper</button>
-            <button onclick="showSection('home')">Back to start</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="urgent" class="section">
-      <div class="card">
-        <h2>I Need Help Now</h2>
-        <p>This prototype cannot contact emergency services automatically.</p>
-        <p>If someone is in immediate danger:</p>
-        <ul>
-          <li>Go to a safer place if you can do so safely.</li>
-          <li>Tell a trusted adult immediately.</li>
-          <li>Contact the appropriate local emergency or child-protection service.</li>
-          <li>Do not confront an unsafe person alone.</li>
-          <li>If online blackmail is involved, do not send more money or images.</li>
-        </ul>
-        <p class="danger-note">A real app must verify local emergency and child-protection contacts before displaying them.</p>
-        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
-      </div>
-    </div>
-    <div id="trained" class="section">
-      <div class="card">
-        <h2>Get verified help</h2>
-        <div class="demo-banner" style="margin-bottom:12px;">
-          <strong>PROTOTYPE MODE</strong>
-          This does not connect you to counselors or emergency services. Do not enter real personal information.
-        </div>
-        <p>SafeVoice does not connect you to counselors, psychologists, cyber-security agents, police, or child-protection agencies. If you need real support, you can contact these verified helplines yourself:</p>
-        <ul>
-          <li><strong>Pakistan Child Helpline:</strong> 1121</li>
-          <li><strong>FIA Cyber Crime Helpline:</strong> 1991</li>
-          <li><strong>Digital Rights Foundation — Digital Security Helpline:</strong> 0800-39393</li>
-        </ul>
-        <p class="muted">Honest note: SafeVoice currently does not provide emergency reporting, live chat, counselling, professional matching, or direct contact with any agency. The helplines above are independent services, separate from this app, that you can contact directly.</p>
-        <p class="danger-note">A real app must never connect a child directly with an unknown adult. It must never allow unmoderated private messaging.</p>
-        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
-      </div>
-    </div>
-    <div id="report" class="section">
-      <div class="card">
-        <h2>Report Something Safely</h2>
-        <div class="demo-banner" style="margin-bottom:12px;">
-          <strong>PROTOTYPE MODE</strong>
-          This does NOT submit reports. Do not enter real personal information.
-        </div>
-        <p>A full reporting system should:</p>
-        <ul>
-          <li>Explain what information will be collected.</li>
-          <li>Collect only essential information.</li>
-          <li>Explain who will receive the report.</li>
-          <li>Encrypt data during transfer and storage.</li>
-          <li>Send urgent situations to trained safeguarding staff.</li>
-          <li>Show immediate safety guidance.</li>
-        </ul>
-        <p class="muted">This prototype does not collect, save, or send any reports.</p>
-        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
-      </div>
-    </div>
-    <div id="resources" class="section">
-      <div class="card">
-        <h2>Safety Resource Library</h2>
-        <p class="muted">Choose a topic to read age-appropriate safety guidance.</p>
-        <div style="display:grid; gap:8px; margin-bottom:14px;">
-          <button onclick="showResource('r1')">1. Safety and Rights</button>
-          <button onclick="showResource('r2')">2. Online Threats and Blackmail</button>
-          <button onclick="showResource('r3')">3. Bullying</button>
-          <button onclick="showResource('r4')">4. A Simple Safety Plan</button>
-          <button onclick="showResource('r5')">5. Getting Support</button>
-          <button onclick="showSection('home')">6. Back to SafeVoice home</button>
-        </div>
-        <div id="r1" class="resource-view" style="display:none;">
-          <h3 style="margin:14px 0 6px;">Safety and Rights</h3>
-          <p>Everyone deserves to be treated safely and respectfully. Abuse, threats, bullying, blackmail, and exploitation are not your fault. If it is safe, consider telling a trusted adult, teacher, counselor, doctor, relative, or child-protection professional.</p>
-          <div class="back-row"><button onclick="hideResource('r1')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
-        </div>
-        <div id="r2" class="resource-view" style="display:none;">
-          <h3 style="margin:14px 0 6px;">Online Threats and Blackmail</h3>
-          <p>If someone pressures, threatens, or blackmails you online, do not send more images, money, passwords, or personal information. Do not meet the person alone. If it is safe, save usernames, dates, and messages, then ask a trusted adult or verified cyber-safety service for help.</p>
-          <div class="back-row"><button onclick="hideResource('r2')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
-        </div>
-        <div id="r3" class="resource-view" style="display:none;">
-          <h3 style="margin:14px 0 6px;">Bullying</h3>
-          <p>Bullying is not your fault. If it is safe, save dates, messages, or screenshots. Tell a trusted adult or use available reporting processes. Avoid responding to threats alone.</p>
-          <div class="back-row"><button onclick="hideResource('r3')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
-        </div>
-        <div id="r4" class="resource-view" style="display:none;">
-          <h3 style="margin:14px 0 6px;">A Simple Safety Plan</h3>
-          <p>Think of one trusted adult and one backup adult you could contact. If you feel unsafe, move toward a safer public place when possible. Do not confront a person who may harm you, and do not tell an unsafe person about your plan.</p>
-          <div class="back-row"><button onclick="hideResource('r4')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
-        </div>
-        <div id="r5" class="resource-view" style="display:none;">
-          <h3 style="margin:14px 0 6px;">Getting Support</h3>
-          <p>You deserve support from trained people. A counselor can provide emotional support. A child-protection professional can help with safeguarding. A cyber-safety specialist can help with online threats. This prototype cannot replace these services.</p>
-          <div class="back-row"><button onclick="hideResource('r5')">Back to library</button><button onclick="showSection('home')">Back to home</button></div>
-        </div>
-      </div>
-    </div>
-    <div id="community" class="section">
-      <div class="card">
-        <h2>Community Support, Moderated</h2>
-        <div class="demo-banner" style="margin-bottom:12px;">
-          <strong>PROTOTYPE MODE</strong>
-          This does not run a real community. Do not enter real personal information.
-        </div>
-        <p>Peer encouragement can reduce loneliness, but it must be safe.</p>
-        <p>A full community-support feature would require:</p>
-        <ul>
-          <li>Anonymous usernames instead of real names.</li>
-          <li>No private messaging.</li>
-          <li>No adult pretending to be a peer.</li>
-          <li>No sharing addresses, phone numbers, passwords, or images.</li>
-          <li>Trained moderators reviewing content.</li>
-          <li>Clear reporting tools and safety rules.</li>
-          <li>Escalation of high-risk posts to trained professionals.</li>
-        </ul>
-        <p>Example supportive messages:</p>
-        <ul>
-          <li>[Moderator] "You are not alone."</li>
-          <li>[Moderator] "What happened is not your fault."</li>
-          <li>[Moderator] "Please contact a trusted adult or trained helper."</li>
-        </ul>
-        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
-      </div>
-    </div>
-    <div id="about" class="section">
-      <div class="card">
-        <h2>About SafeVoice</h2>
-        <p>SafeVoice — Youth Safety Support Prototype (2026)</p>
-        <p>SafeVoice is a direct youth-safety support and reporting concept. It gives children and teenagers a clear, low-barrier first step toward verified help when they feel unable to tell a parent or guardian immediately.</p>
-        <p>The concept includes:</p>
-        <ul>
-          <li>Urgent-help guidance.</li>
-          <li>Verified professional-support pathways.</li>
-          <li>Safer reporting pathways.</li>
-          <li>Age-appropriate safety resources.</li>
-          <li>Moderated community-support principles.</li>
-        </ul>
-        <p class="danger-note">This is a demonstration prototype only. It is not a real counseling, emergency, police, or child-protection service. Do not use this in a real crisis. For demonstration purposes only.</p>
-        <div class="back-row"><button onclick="showSection('home')">Back to home</button></div>
-      </div>
-    </div>
-    <footer>SafeVoice — demonstration prototype. Not an emergency service. Does not collect or store real data.</footer>
+      <!-- Single Chat Input Form -->
+      <form id="chatMessageForm" class="chat-form" autocomplete="off">
+        <label for="chatTextInput" class="sr-only">Type your message</label>
+        <input
+          id="chatTextInput"
+          class="chat-input"
+          type="text"
+          name="userMessage"
+          placeholder="Type your message here..."
+          maxlength="800"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+        />
+        <button id="chatSendBtn" class="btn-chat-send" type="submit" aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </section>
   </div>
 
-  <!-- SafeChat Box -->
-  <div class="safechat-container">
-    <div class="safechat-title">SafeVoice Helper</div>
-    <div class="safechat-subtitle">
-      This is an automated helper, not a human and not an emergency service. If you are in immediate danger, contact a trusted adult or call a helpline.
-    </div>
-
-    <div id="safechat-messages" class="safechat-messages">
-      <!-- messages will appear here -->
-    </div>
-
-    <form id="safechat-form" class="safechat-input-row">
-      <input id="sv-helper-msg-2026" type="text" placeholder="Type your message here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-      <button type="submit">Send</button>
-    </form>
-
-    <div class="safechat-helplines">
-      <strong>Helplines (Pakistan):</strong><br>
-      Child protection: 1121 • Emergency: 112 • FIA Cyber Crime: 1991 • Digital Rights Foundation: 0800-39393
-    </div>
-  </div>
-
-  <!-- AI-powered SafeVoice Chat — inline (not fixed position) to avoid mobile keyboard/viewport conflicts -->
-  <div class="safechat-container">
-    <div class="safechat-title">SafeVoice AI Chat</div>
-    <div class="safechat-subtitle">
-      This is an AI-powered helper, not a human and not an emergency service. If you are in immediate danger, contact a trusted adult or call a helpline.
-    </div>
-
-    <div id="ai-chat-messages" class="safechat-messages" aria-live="polite">
-      <div class="safechat-message bot">
-        Hi, I'm SafeVoice. You can talk to me without being judged. What's happening?
-      </div>
-    </div>
-
-    <form id="ai-chat-form" class="safechat-input-row">
-      <input
-        id="ai-chat-input"
-        type="text"
-        placeholder="Write a message..."
-        maxlength="1000"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-        required
-      />
-      <button type="submit">Send</button>
-    </form>
-  </div>
-
-  <script src="safechat.js"></script>
-  <script>
-    function hideAllResources() {
-      document.querySelectorAll('.resource-view').forEach(view => {
-        view.style.display = 'none';
-      });
-    }
-    function hideSafetyFlow() {
-      document.querySelectorAll(".flow-panel").forEach(panel => {
-        panel.classList.remove("active");
-      });
-    }
-    function showFlow(flowId) {
-      hideAllResources();
-      hideSafetyFlow();
-
-      const panel = document.getElementById("flow-" + flowId);
-
-      if (panel) {
-        panel.classList.add("active");
-        panel.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    }
-    function showSection(id) {
-      hideAllResources();
-      hideSafetyFlow();
-
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-      });
-
-      const section = document.getElementById(id);
-
-      if (section) {
-        section.classList.add('active');
-      }
-
-      window.scrollTo(0, 0);
-    }
-    function openSafeChat() {
-      const chat = document.querySelector(".safechat-container");
-
-      if (chat) {
-        chat.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-        const input = document.getElementById("sv-helper-msg-2026");
-
-        if (input) {
-          input.focus();
-        }
-      } else {
-        alert("The SafeVoice Helper is not available yet.");
-      }
-    }
-    function showResource(resId) {
-      document.getElementById(resId).style.display = 'block';
-      window.scrollTo(0, 0);
-    }
-    function hideResource(resId) {
-      document.getElementById(resId).style.display = 'none';
-    }
-  </script>
-
-  <script>
-    // ==== AI-powered SafeVoice Chat (v2 — inline layout + composition guard) ====
-    // GitHub Pages only serves static files. This points to your separately
-    // deployed backend (see server.mjs). Update if you redeploy elsewhere.
-    const AI_CHAT_API_ENDPOINT = "https://safevoice-server-59yy.onrender.com/api/chat";
-
-    const aiChatForm = document.getElementById("ai-chat-form");
-    const aiChatInput = document.getElementById("ai-chat-input");
-    const aiChatMessages = document.getElementById("ai-chat-messages");
-
-    const aiConversation = [];
-    let aiInputIsComposing = false;
-
-    // Guards against grabbing a half-finished word from the keyboard's
-    // predictive/autocorrect engine — only read the field once composition
-    // has fully settled.
-    aiChatInput.addEventListener("compositionstart", () => {
-      aiInputIsComposing = true;
-    });
-    aiChatInput.addEventListener("compositionend", () => {
-      aiInputIsComposing = false;
-    });
-
-    function addAiMessage(text, sender) {
-      const div = document.createElement("div");
-      div.className = "safechat-message " + sender;
-      div.textContent = text;
-      aiChatMessages.appendChild(div);
-      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-      return div;
-    }
-
-    aiChatForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      // If the keyboard is still mid-composition, wait a moment and let
-      // the browser finish before reading the field's real value.
-      if (aiInputIsComposing) {
-        await new Promise(resolve => setTimeout(resolve, 150));
-      }
-
-      const text = aiChatInput.value.trim();
-      if (!text) return;
-
-      addAiMessage(text, "user");
-      aiConversation.push({ role: "user", content: text });
-
-      aiChatInput.value = "";
-      aiChatInput.disabled = true;
-
-      const typingMessage = addAiMessage("Thinking...", "bot");
-
-      try {
-        const response = await fetch(AI_CHAT_API_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: aiConversation })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Chat request failed.");
-        }
-
-        typingMessage.textContent = data.reply;
-        aiConversation.push({ role: "assistant", content: data.reply });
-      } catch (error) {
-        console.error(error);
-        typingMessage.textContent =
-          "I'm having trouble connecting. Please try again in a moment.";
-      } finally {
-        aiChatInput.disabled = false;
-        aiChatInput.focus();
-      }
-    });
-  </script>
-
-  <script>
-    // ==== Exist grounding button ====
-    const existButton = document.getElementById("existButton");
-    const existBox = document.getElementById("existBox");
-    const startGrounding = document.getElementById("startGrounding");
-    const existInstruction = document.getElementById("existInstruction");
-
-    existButton.addEventListener("click", () => {
-      existBox.hidden = !existBox.hidden;
-
-      if (!existBox.hidden) {
-        existBox.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-    });
-
-    startGrounding.addEventListener("click", async () => {
-      startGrounding.disabled = true;
-
-      const steps = [
-        ["Breathe in slowly.", 4000],
-        ["Hold your breath gently.", 4000],
-        ["Breathe out slowly.", 6000],
-        ["Notice one thing you can see.", 3500],
-        ["Notice one thing you can hear.", 3500],
-        ["Choose one safe next step.", 3500]
-      ];
-
-      for (const [instruction, duration] of steps) {
-        existInstruction.textContent = instruction;
-        await new Promise(resolve => setTimeout(resolve, duration));
-      }
-
-      existInstruction.textContent =
-        "You made it through the exercise. You can repeat it or talk to SafeVoice.";
-      startGrounding.disabled = false;
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
