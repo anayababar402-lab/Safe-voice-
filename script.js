@@ -100,6 +100,11 @@ function initChatWidget() {
 
   if (!chatWindow || !form || !input || !messagesList) return;
 
+  // Points at the backend deployed on Render (see server.mjs). If you ever
+  // redeploy it elsewhere, update this one line.
+  const AI_CHAT_API_ENDPOINT = "https://safevoice-server-59yy.onrender.com/api/chat";
+  const conversation = [];
+
   function openChat() {
     chatWindow.hidden = false;
     if (launcher) launcher.hidden = true;
@@ -115,6 +120,14 @@ function initChatWidget() {
   if (navOpenBtn) navOpenBtn.addEventListener("click", openChat);
   if (heroOpenBtn) heroOpenBtn.addEventListener("click", openChat);
   if (closeBtn) closeBtn.addEventListener("click", closeChat);
+
+  // Guards against grabbing a half-finished word from the keyboard's
+  // predictive/autocorrect engine — this, plus the autocomplete="off" /
+  // autocorrect="off" attributes on the input, is what fixed the scrambled
+  // typing bug. Keep both in place.
+  let isComposing = false;
+  input.addEventListener("compositionstart", () => { isComposing = true; });
+  input.addEventListener("compositionend", () => { isComposing = false; });
 
   function currentTime() {
     return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -159,7 +172,9 @@ function initChatWidget() {
     return "general";
   }
 
-  function getReply(rawText) {
+  // Offline fallback — used only if the AI backend can't be reached
+  // (e.g. the free server is still waking up, or there's no connection).
+  function getFallbackReply(rawText) {
     const intent = detectIntent(rawText);
 
     if (intent === "crisis") {
@@ -180,26 +195,55 @@ function initChatWidget() {
     }
 
     return (
-      "Thanks for messaging SafeVoice. I'm an automated assistant, not a human, and I can't handle emergencies. " +
-      "I can share general safety information and a listening ear. If you ever feel unsafe or in crisis, please " +
-      "contact a trusted adult or a helpline. " + HELPLINES_TEXT
+      "Thanks for messaging SafeVoice. I'm having trouble reaching my full assistant right now, so here's a " +
+      "general note instead: I can't handle emergencies. If you ever feel unsafe or in crisis, please contact " +
+      "a trusted adult or a helpline. " + HELPLINES_TEXT
     );
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    // If the keyboard is still mid-composition, let it settle before
+    // reading the field's real value.
+    if (isComposing) {
+      await new Promise((resolve) => setTimeout(resolve, 150));
+    }
 
     const text = input.value.trim();
     if (!text) return;
 
     addBubble(text, "user");
+    conversation.push({ role: "user", content: text });
+
     input.value = "";
     input.disabled = true;
 
-    setTimeout(() => {
-      addBubble(getReply(text), "bot");
+    const typingBubble = addBubble("Thinking...", "bot");
+
+    try {
+      const response = await fetch(AI_CHAT_API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversation })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Chat request failed.");
+      }
+
+      typingBubble.querySelector("p").textContent = data.reply;
+      conversation.push({ role: "assistant", content: data.reply });
+    } catch (error) {
+      console.error(error);
+      // Free-tier servers can take up to ~50s to wake from sleep — fall
+      // back to a helpful offline reply rather than leaving a dead end.
+      typingBubble.querySelector("p").textContent = getFallbackReply(text);
+    } finally {
       input.disabled = false;
       input.focus();
-    }, 450);
+    }
   });
 }
