@@ -3,31 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SafeVoice - A secure, confidential youth safety and support platform." />
+  <meta name="description" content="SafeVoice - A youth safety and support platform." />
   <title>SafeVoice | Youth Safety &amp; Support</title>
-  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- Quick Emergency Exit Bar -->
   <aside class="quick-exit-bar" aria-label="Emergency quick exit">
     <div class="container exit-flex">
-      <span>Need to leave quickly? Pressing Quick Exit clears this page immediately.</span>
+      <span>Need to leave quickly? Use Quick Exit to open a neutral page.</span>
       <button id="quickExitBtn" class="btn btn-exit" type="button">⚡ Quick Exit</button>
     </div>
   </aside>
 
-  <!-- Site Navigation -->
   <header class="site-header">
     <div class="container header-flex">
-      <a href="#hero" class="brand">
-        <span class="brand-shield" aria-hidden="true">🛡️</span>
-        <span class="brand-name">SafeVoice</span>
-      </a>
-      <nav class="site-nav" aria-label="Main Navigation">
+      <a href="#hero" class="brand"><span class="brand-shield" aria-hidden="true">🛡️</span><span class="brand-name">SafeVoice</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#resources">Safety Tools</a>
         <a href="#grounding">Grounding</a>
@@ -38,184 +32,72 @@
   </header>
 
   <main>
-    <!-- Hero Section -->
     <section class="hero-section" id="hero">
       <div class="container hero-content">
-        <span class="badge">Confidential &amp; Private Space</span>
-        <h1 class="hero-title">
-          Your Voice Matters.<br />
-          <span class="gradient-text">You Are Never Alone.</span>
-        </h1>
-        <p class="hero-subtitle">
-          SafeVoice provides immediate guidance, mental grounding, and verified resources for young people facing bullying, anxiety, or online harassment.
-        </p>
+        <span class="badge">Private Support Space</span>
+        <h1 class="hero-title">Your Voice Matters.<br /><span class="gradient-text">You Are Never Alone.</span></h1>
+        <p class="hero-subtitle">SafeVoice offers general guidance, calming tools, and links to support resources for young people facing bullying, anxiety, or online harassment.</p>
         <div class="hero-actions">
-          <button id="heroOpenChatBtn" class="btn btn-primary" type="button">
-            💬 Talk to SafeVoice
-          </button>
+          <button id="heroOpenChatBtn" class="btn btn-primary" type="button">💬 Talk to SafeVoice</button>
           <a href="#grounding" class="btn btn-secondary">Try Grounding Tool</a>
         </div>
       </div>
     </section>
 
-    <!-- Core Safety Features -->
-    <section class="section" id="resources">
+    <section class="section section-alt" id="about">
       <div class="container">
         <div class="section-heading">
-          <h2>Safety &amp; Support Tools</h2>
-          <p>Practical steps and immediate assistance when you need it most.</p>
-        </div>
-
-        <div class="card-grid">
-          <article class="feature-card">
-            <div class="card-icon" aria-hidden="true">🔒</div>
-            <h3>Privacy First</h3>
-            <p>No login or personal tracking required. Access tools and talk to the assistant with complete anonymity.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="card-icon" aria-hidden="true">📱</div>
-            <h3>Cyber Safety Tips</h3>
-            <p>Learn how to preserve digital evidence, secure your social accounts, and report threats without escalating conflict.</p>
-          </article>
-
-          <article class="feature-card">
-            <div class="card-icon" aria-hidden="true">🤝</div>
-            <h3>Community Guidance</h3>
-            <p>Guidance on how to safely approach trusted teachers, family members, or counselors about ongoing challenges.</p>
-          </article>
+          <h2>About SafeVoice</h2>
+          <p>A student-friendly space for general safety guidance, grounding exercises, and finding trusted human support.</p>
         </div>
       </div>
     </section>
 
-    <!-- Grounding / Exist Interactive Section -->
+    <section class="section" id="resources">
+      <div class="container">
+        <div class="section-heading"><h2>Safety &amp; Support Tools</h2><p>Practical steps and resources when you need support.</p></div>
+        <div class="card-grid">
+          <article class="feature-card"><div class="card-icon" aria-hidden="true">🔒</div><h3>Privacy Awareness</h3><p>Learn practical ways to protect accounts, devices, and personal information online.</p></article>
+          <article class="feature-card"><div class="card-icon" aria-hidden="true">📱</div><h3>Cyber Safety Tips</h3><p>Learn how to preserve digital evidence, secure social accounts, and report threats without escalating conflict.</p></article>
+          <article class="feature-card"><div class="card-icon" aria-hidden="true">🤝</div><h3>Trusted Support</h3><p>Find ideas for safely approaching a trusted teacher, family member, counselor, or local support service.</p></article>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-alt" id="grounding">
       <div class="container">
         <div class="grounding-card">
-          <div class="grounding-header">
-            <span class="badge badge-accent">Interactive Grounding</span>
-            <h2>Take a Moment to Exist</h2>
-            <p>When thoughts feel overwhelming, steady breathing and physical grounding help reset your focus.</p>
-          </div>
-
-          <div class="grounding-visual" aria-hidden="true">
-            <div id="groundingCircle" class="pulse-circle"></div>
-          </div>
-
-          <div class="grounding-display">
-            <p id="groundingInstruction">Click below to start a 5-step guided calming exercise.</p>
-          </div>
-
-          <div class="grounding-controls">
-            <button id="startGroundingBtn" class="btn btn-primary" type="button">Start Exercise</button>
-            <button id="resetGroundingBtn" class="btn btn-outline" type="button" disabled>Reset</button>
-          </div>
+          <div class="grounding-header"><span class="badge badge-accent">Interactive Grounding</span><h2>Take a Moment to Exist</h2><p>When thoughts feel overwhelming, slow breathing and grounding may help you refocus.</p></div>
+          <div class="grounding-visual" aria-hidden="true"><div id="groundingCircle" class="pulse-circle"></div></div>
+          <div class="grounding-display"><p id="groundingInstruction">Click below to start a 5-step guided calming exercise.</p></div>
+          <div class="grounding-controls"><button id="startGroundingBtn" class="btn btn-primary" type="button">Start Exercise</button><button id="resetGroundingBtn" class="btn btn-outline" type="button" disabled>Reset</button></div>
         </div>
       </div>
     </section>
 
-    <!-- Helplines Directory -->
     <section class="section" id="helplines">
       <div class="container">
-        <div class="section-heading">
-          <h2>Emergency &amp; Support Contacts</h2>
-          <p>Verified hotlines available across Pakistan when you need direct human assistance.</p>
-        </div>
-
+        <div class="section-heading"><h2>Emergency &amp; Support Contacts</h2><p>Check official sources for the most current contact details before relying on a helpline.</p></div>
         <div class="helpline-grid">
-          <article class="helpline-card">
-            <h4>Police Emergency</h4>
-            <a href="tel:15" class="helpline-number">15</a>
-            <small>Pakistan Police Immediate Emergency Dispatch</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>FIA Cyber Crime Helpline</h4>
-            <a href="tel:1991" class="helpline-number">1991</a>
-            <small>Direct reporting for online harassment, blackmail, and unauthorized access</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>Mental Health Helpline (Umang)</h4>
-            <a href="tel:03117786264" class="helpline-number">0311-7786264</a>
-            <small>24/7 Confidential psychological first aid &amp; emotional support</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>Child Protection Bureau</h4>
-            <a href="tel:1121" class="helpline-number">1121</a>
-            <small>Official rescue &amp; protection services for children and minors</small>
-          </article>
+          <article class="helpline-card"><h4>Police Emergency</h4><a href="tel:15" class="helpline-number">15</a><small>Pakistan Police emergency dispatch</small></article>
+          <article class="helpline-card"><h4>FIA Cyber Crime</h4><a href="tel:1991" class="helpline-number">1991</a><small>Report cybercrime or online harassment</small></article>
+          <article class="helpline-card"><h4>Umang Mental Health</h4><a href="tel:03117786264" class="helpline-number">0311-7786264</a><small>Emotional support and psychological first aid</small></article>
+          <article class="helpline-card"><h4>Child Protection</h4><a href="tel:1121" class="helpline-number">1121</a><small>Child rescue and protection support</small></article>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <p>&copy; 2026 SafeVoice. Built for youth safety, privacy, and accessibility.</p>
-      <p class="disclaimer">SafeVoice provides educational guidance and immediate calming tools. If you or someone you know is in immediate physical danger, call local emergency authorities immediately.</p>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container footer-content"><p>&copy; 2026 SafeVoice. Built for youth safety, privacy, and accessibility.</p><p class="disclaimer">SafeVoice provides educational information and calming tools. It is not an emergency service, medical provider, or substitute for professional support. If someone is in immediate danger, contact local emergency services or a trusted adult.</p></div></footer>
 
-  <!-- ================================================================= -->
-  <!-- SINGLE UNIFIED CHATBOT COMPONENT                                  -->
-  <!-- ================================================================= -->
   <div id="safevoiceChatWidget" class="chat-widget">
-    <!-- Floating Launcher Button -->
-    <button id="chatToggleLauncher" class="chat-launcher" type="button" aria-label="Open SafeVoice Chatbot">
-      <span class="launcher-icon" aria-hidden="true">💬</span>
-      <span class="launcher-text">Talk to SafeVoice</span>
-    </button>
-
-    <!-- Chat Modal Window -->
+    <button id="chatToggleLauncher" class="chat-launcher" type="button" aria-label="Open SafeVoice assistant"><span class="launcher-icon" aria-hidden="true">💬</span><span class="launcher-text">Talk to SafeVoice</span></button>
     <section id="chatWindow" class="chat-window" aria-labelledby="chatHeading" hidden>
-      <header class="chat-window-header">
-        <div class="chat-header-info">
-          <div class="status-indicator" aria-hidden="true"></div>
-          <div>
-            <h2 id="chatHeading" class="chat-title">SafeVoice Assistant</h2>
-            <span class="chat-status-text">Confidential &amp; Private</span>
-          </div>
-        </div>
-        <button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close Chat">&times;</button>
-      </header>
-
-      <!-- Message History List -->
-      <div id="chatMessagesList" class="chat-messages" role="log" aria-live="polite">
-        <div class="chat-bubble bot-bubble">
-          <p>Hi, I'm the SafeVoice assistant. I'm here to listen, share safety tips, and guide you through difficult moments. What's on your mind?</p>
-          <time class="bubble-time">Just now</time>
-        </div>
-      </div>
-
-      <!-- Single Chat Input Form -->
-      <form id="chatMessageForm" class="chat-form" autocomplete="off">
-        <label for="chatTextInput" class="sr-only">Type your message</label>
-        <input
-          id="chatTextInput"
-          class="chat-input"
-          type="text"
-          name="userMessage"
-          placeholder="Type your message here..."
-          maxlength="800"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-          spellcheck="false"
-          required
-        />
-        <button id="chatSendBtn" class="btn-chat-send" type="submit" aria-label="Send message">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-        </button>
-      </form>
+      <header class="chat-window-header"><div class="chat-header-info"><div class="status-indicator" aria-hidden="true"></div><div><h2 id="chatHeading" class="chat-title">SafeVoice Assistant</h2><span class="chat-status-text">AI support, not emergency help</span></div></div><button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close chat">&times;</button></header>
+      <div id="chatMessagesList" class="chat-messages" role="log" aria-live="polite"></div>
+      <form id="chatMessageForm" class="chat-form" autocomplete="off"><label for="chatTextInput" class="sr-only">Type your message</label><input id="chatTextInput" class="chat-input" type="text" name="userMessage" placeholder="Type your message here..." maxlength="800" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required /><button id="chatSendBtn" class="btn-chat-send" type="submit" aria-label="Send message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button></form>
     </section>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
