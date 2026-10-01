@@ -1,56 +1,236 @@
-
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SafeVoice - Youth safety information, grounding tools, and verified support resources.">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SafeVoice - A secure, confidential youth safety and support platform." />
   <title>SafeVoice | Youth Safety &amp; Support</title>
-  <link rel="stylesheet" href="https://d2z0o16i8xm8ak.cloudfront.net/web/direct-files/162ea99b819e19c2f2e66367b58aad5a/a8d04369-b3e0-46d4-80b8-3d8f963f8822/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Pacifico&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <div id="welcomeScreen" class="fullscreen-panel">
     <div class="panel-content">
       <div class="sv-logo">SafeVoice</div>
       <h1 class="welcome-title">Welcome to SafeVoice</h1>
-      <p class="welcome-subtitle">A youth-safety information space for bullying, fear, online harassment, and difficult feelings.</p>
+      <p class="welcome-subtitle">
+        A safe, anonymous space to talk about anything — bullying, fear, hurt, or feelings you can't share elsewhere.
+      </p>
       <div class="welcome-points">
         <div class="point">🔒 No real name needed</div>
-        <div class="point">💬 Do not share private information</div>
-        <div class="point">🌿 Guidance and grounding tools</div>
+        <div class="point">💬 Private &amp; judgment-free</div>
+        <div class="point">🌿 Available anytime</div>
       </div>
-      <button id="welcomeEnterBtn" class="btn btn-primary btn-large" type="button">Enter SafeVoice</button>
+      <button id="welcomeEnterBtn" class="btn btn-primary btn-large" type="button">
+        Enter SafeVoice
+      </button>
     </div>
   </div>
 
-  
+  <div id="nicknameScreen" class="fullscreen-panel" hidden>
+    <div class="panel-content">
+      <div class="sv-logo">SafeVoice</div>
+      <h2 class="welcome-title small">Choose a Nickname</h2>
+      <p class="welcome-subtitle">
+        Use any nickname you like — <strong>never your real name</strong>.
+        Remember it, because it's how you'll see your chat history again.
+      </p>
+      <input
+        id="nicknameInput"
+        class="nickname-input"
+        type="text"
+        placeholder="Type your nickname here..."
+        maxlength="20"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+      <p id="nicknameHint" class="nickname-hint">Your nickname is saved only on this device.</p>
+      <button id="nicknameContinueBtn" class="btn btn-primary btn-large" type="button">
+        Continue
+      </button>
+    </div>
+  </div>
 
-  
-  
+  <div id="mainSite" hidden>
 
+    <aside class="quick-exit-bar" aria-label="Emergency quick exit">
+      <div class="container exit-flex">
+        <span>Need to leave quickly? Pressing Quick Exit clears this page immediately.</span>
+        <button id="quickExitBtn" class="btn btn-exit" type="button">⚡ Quick Exit</button>
+      </div>
+    </aside>
 
-</body></html>
-------MultipartBoundary--eSL5AJxXFq4KX2AncPezdqsmUL47tCqMn3UobtVCIG----
-Content-Type: text/css
-Content-Transfer-Encoding: binary
-Content-Location: https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Pacifico&display=swap
+    <header class="site-header">
+      <div class="container header-flex">
+        <a href="#hero" class="brand">
+          <span class="brand-shield" aria-hidden="true">🛡️</span>
+          <span class="brand-name">SafeVoice</span>
+        </a>
+        <nav class="site-nav" aria-label="Main Navigation">
+          <a href="#about">About</a>
+          <a href="#resources">Safety Tools</a>
+          <a href="#grounding">Grounding</a>
+          <a href="#helplines">Helplines</a>
+          <button id="navOpenChatBtn" class="btn btn-outline" type="button">Assistant</button>
+        </nav>
+      </div>
+    </header>
 
-@charset "utf-8";
+    <main>
+      <section class="hero-section" id="hero">
+        <div class="container hero-content">
+          <span class="badge">Confidential &amp; Private Space</span>
+          <h1 class="hero-title">
+            Your Voice Matters.<br />
+            <span class="gradient-text">You Are Never Alone.</span>
+          </h1>
+          <p class="hero-subtitle">
+            SafeVoice provides immediate guidance, mental grounding, and verified resources for young people facing bullying, anxiety, or online harassment.
+          </p>
+          <div class="hero-actions">
+            <button id="heroOpenChatBtn" class="btn btn-primary" type="button">
+              💬 Talk to SafeVoice
+            </button>
+            <a href="#grounding" class="btn btn-secondary">Try Grounding Tool</a>
+          </div>
+        </div>
+      </section>
 
-@font-face { font-family: Pacifico; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6K6MmBp0u-zK4.woff2") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+      <section class="section" id="resources">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Safety &amp; Support Tools</h2>
+            <p>Practical steps and immediate assistance when you need it most.</p>
+          </div>
+          <div class="card-grid">
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">🔒</div>
+              <h3>Privacy First</h3>
+              <p>No login or personal tracking required. Access tools and talk to the assistant with complete anonymity.</p>
+            </article>
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">📱</div>
+              <h3>Cyber Safety Tips</h3>
+              <p>Learn how to preserve digital evidence, secure your social accounts, and report threats without escalating conflict.</p>
+            </article>
+            <article class="feature-card">
+              <div class="card-icon" aria-hidden="true">🤝</div>
+              <h3>Community Guidance</h3>
+              <p>Guidance on how to safely approach trusted teachers, family members, or counselors about ongoing challenges.</p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-@font-face { font-family: Pacifico; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6D6MmBp0u-zK4.woff2") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+      <section class="section section-alt" id="grounding">
+        <div class="container">
+          <div class="grounding-card">
+            <div class="grounding-header">
+              <span class="badge badge-accent">Interactive Grounding</span>
+              <h2>Take a Moment to Exist</h2>
+              <p>When thoughts feel overwhelming, steady breathing and physical grounding help reset your focus.</p>
+            </div>
+            <div class="grounding-visual" aria-hidden="true">
+              <div id="groundingCircle" class="pulse-circle"></div>
+            </div>
+            <div class="grounding-display">
+              <p id="groundingInstruction">Click below to start a 5-step guided calming exercise.</p>
+            </div>
+            <div class="grounding-controls">
+              <button id="startGroundingBtn" class="btn btn-primary" type="button">Start Exercise</button>
+              <button id="resetGroundingBtn" class="btn btn-outline" type="button" disabled>Reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-@font-face { font-family: Pacifico; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6I6MmBp0u-zK4.woff2") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+      <section class="section" id="helplines">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Emergency &amp; Support Contacts</h2>
+            <p>Verified hotlines available across Pakistan when you need direct human assistance.</p>
+          </div>
+          <div class="helpline-grid">
+            <article class="helpline-card">
+              <h4>Police Emergency</h4>
+              <a href="tel:15" class="helpline-number">15</a>
+              <small>Pakistan Police Immediate Emergency Dispatch</small>
+            </article>
+            <article class="helpline-card">
+              <h4>FIA Cyber Crime Helpline</h4>
+              <a href="tel:1991" class="helpline-number">1991</a>
+              <small>Direct reporting for online harassment, blackmail, and unauthorized access</small>
+            </article>
+            <article class="helpline-card">
+              <h4>Mental Health Helpline (Umang)</h4>
+              <a href="tel:03117786264" class="helpline-number">0311-7786264</a>
+              <small>24/7 Confidential psychological first aid &amp; emotional support</small>
+            </article>
+            <article class="helpline-card">
+              <h4>Child Protection Bureau</h4>
+              <a href="tel:1121" class="helpline-number">1121</a>
+              <small>Official rescue &amp; protection services for children and minors</small>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
 
-@font-face { font-family: Pacifico; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6J6MmBp0u-zK4.woff2") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>&copy; 2026 SafeVoice. Built for youth safety, privacy, and accessibility.</p>
+        <p class="disclaimer">SafeVoice provides educational guidance and immediate calming tools. If you or someone you know is in immediate physical danger, call local emergency authorities immediately.</p>
+      </div>
+    </footer>
 
-@font-face { font-family: Pacifico; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/pacifico/v23/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    <div id="safevoiceChatWidget" class="chat-widget">
+      <button id="chatToggleLauncher" class="chat-launcher" type="button" aria-label="Open SafeVoice Chatbot">
+        <span class="launcher-icon" aria-hidden="true">💬</span>
+        <span class="launcher-text">Talk to SafeVoice</span>
+      </button>
 
-@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yygg_vbd-E.woff2") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+      <section id="chatWindow" class="chat-window" aria-labelledby="chatHeading" hidden>
+        <header class="chat-window-header">
+          <div class="chat-header-info">
+            <div class="status-indicator" aria-hidden="true"></div>
+            <div>
+              <h2 id="chatHeading" class="chat-title">SafeVoice Assistant</h2>
+              <span id="chatGreeting" class="chat-status-text">Confidential &amp; Private</span>
+            </div>
+          </div>
+          <button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close Chat">&times;</button>
+        </header>
 
-@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yygg_vbd-E.woff2") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+        <div id="chatMessagesList" class="chat-messages" role="log" aria-live="polite"></div>
 
-@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yygg_vbd-E.woff2") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        <form id="chatMessageForm" class="chat-form" autocomplete="off">
+          <label for="chatTextInput" class="sr-only">Type your message</label>
+          <input
+            id="chatTextInput"
+            class="chat-input"
+            type="text"
+            name="userMessage"
+            placeholder="Type your message here..."
+            maxlength="800"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            required
+          />
+          <button id="chatSendBtn" class="btn-chat-send" type="submit" aria-label="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
 
+  <script src="script.js"></script>
+</body>
+                                                                                                   </html>
