@@ -15,30 +15,9 @@ function initEntryFlow() {
   const mainSite = document.getElementById("mainSite");
   if (!welcomeScreen || !nicknameScreen || !countryScreen || !quizScreen || !mainSite) return;
 
-  let nickname = sessionStorage.getItem("safevoice_nickname");
-  let country = sessionStorage.getItem("safevoice_country");
-  const quizDone = nickname && sessionStorage.getItem("safevoice_quiz_done_" + nickname) === "yes";
-
-  if (nickname && country && quizDone) {
-    hideAllScreens();
-    mainSite.hidden = false;
-    initMainSite(nickname, country);
-    return;
-  }
-  if (nickname && !country) {
-    hideAllScreens();
-    countryScreen.hidden = false;
-    populateCountryDropdown();
-    attachCountryEvents(nickname);
-    return;
-  }
-  if (nickname && country && !quizDone) {
-    hideAllScreens();
-    quizScreen.hidden = false;
-    startQuiz(nickname, country);
-    return;
-  }
-
+  // Always start at the welcome screen and always ask for a nickname —
+  // even for returning users. This matters on shared/public devices: no one
+  // should land straight in someone else's saved chat just by opening the site.
   hideAllScreens();
   welcomeScreen.hidden = false;
 
@@ -67,12 +46,41 @@ function initEntryFlow() {
       nicknameHint.style.color = "#fb7185";
       return;
     }
+
+    const savedNickname = sessionStorage.getItem("safevoice_nickname");
+    const isReturningNickname = Boolean(savedNickname) && nick === savedNickname;
+
     sessionStorage.setItem("safevoice_nickname", nick);
-    nickname = nick;
+
+    const savedCountry = sessionStorage.getItem("safevoice_country");
+    const quizDone = sessionStorage.getItem("safevoice_quiz_done_" + nick) === "yes";
+
+    if (isReturningNickname && savedCountry && quizDone) {
+      // Same nickname as before, quiz already completed:
+      // skip country + quiz, load their saved chat history, go straight in.
+      hideAllScreens();
+      mainSite.hidden = false;
+      initMainSite(nick, savedCountry);
+      return;
+    }
+
+    if (isReturningNickname && savedCountry && !quizDone) {
+      // Same nickname, country already on file, but the quiz wasn't finished
+      // last time — pick back up at the quiz instead of starting fully over.
+      hideAllScreens();
+      quizScreen.hidden = false;
+      startQuiz(nick, savedCountry);
+      return;
+    }
+
+    // New or different nickname (or no country on file yet for this nickname):
+    // start fresh — country selector, then quiz, then a new chat history.
+    // Any previous nickname's saved data (quiz answers, chat history) is left
+    // completely untouched, since it's stored under that nickname's own keys.
     hideAllScreens();
     countryScreen.hidden = false;
     populateCountryDropdown();
-    attachCountryEvents(nickname);
+    attachCountryEvents(nick);
   }
 
   if (nicknameContinueBtn) nicknameContinueBtn.onclick = continueWithNickname;
