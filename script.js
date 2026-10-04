@@ -35,17 +35,22 @@ function initEntryFlow() {
   }
 
   function continueWithNickname() {
-    const nick = (nicknameInput?.value || "").trim();
-    if (nick.length < 2) {
+    const rawNick = (nicknameInput?.value || "").trim();
+    if (rawNick.length < 2) {
       nicknameHint.textContent = "Please enter at least 2 characters.";
       nicknameHint.style.color = "#fb7185";
       return;
     }
-    if (nick.length > 20) {
+    if (rawNick.length > 20) {
       nicknameHint.textContent = "Please use 20 characters or less.";
       nicknameHint.style.color = "#fb7185";
       return;
     }
+
+    // Normalize to lowercase so "Moon", "moon", and "MOON" are treated as the
+    // same returning nickname — phone keyboards often auto-capitalize the
+    // first letter, which otherwise silently creates a "new" user each time.
+    const nick = rawNick.toLowerCase();
 
     const savedNickname = sessionStorage.getItem("safevoice_nickname");
     const isReturningNickname = Boolean(savedNickname) && nick === savedNickname;
