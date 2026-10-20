@@ -1,6 +1,6 @@
 // ============================================================================
 // SafeVoice — Helplines Directory
-// 20 countries with verified numbers. More added as verified.
+// 25 countries with verified numbers. More added as verified.
 // If a number isn't verified, it shows "—" instead of fake data.
 // ============================================================================
 
@@ -185,6 +185,54 @@ const HELPLINES = {
       { label: "Kemenkes Crisis Line", number: "119", note: "Dial then press 8 for suicide prevention" },
       { label: "Ministry of Women Empowerment & Child Protection", number: "021 3842638", note: "Also WhatsApp +62 821 2575 1234" },
       { label: "Emergency", number: "112", note: "Immediate danger" }
+    ]
+  },
+  TR: {
+    name: "Turkey",
+    flag: "🇹🇷",
+    lines: [
+      { label: "ALO 183 Social Support Line", number: "183", note: "24/7 — domestic violence, child abuse, family support" },
+      { label: "Youth Support Line (Genclik Destek Hatti)", number: "0850 455 0070", note: "Counseling for children & young people" },
+      { label: "Mental Health & Psychological Support Line", number: "182", note: "24/7 crisis support & psychiatric referrals" },
+      { label: "Emergency", number: "112", note: "Immediate danger — multilingual (EN/AR/DE/RU)" }
+    ]
+  },
+  EG: {
+    name: "Egypt",
+    flag: "🇪🇬",
+    lines: [
+      { label: "Child Helpline (NCCM)", number: "16000", note: "24/7, also via WhatsApp — reports on abuse, bullying, child risk" },
+      { label: "Mental Health & Addiction Hotline", number: "16328", note: "24/7, Ministry of Health" },
+      { label: "Emergency", number: "122", note: "Police — or 123 for medical emergency" }
+    ]
+  },
+  BR: {
+    name: "Brazil",
+    flag: "🇧🇷",
+    lines: [
+      { label: "Disque 100 — Human Rights Violations", number: "100", note: "24/7, free — child abuse & exploitation reporting" },
+      { label: "CVV (Centro de Valorização da Vida)", number: "188", note: "24/7 emotional support & suicide prevention" },
+      { label: "Women's Helpline", number: "180", note: "24/7 domestic violence support" },
+      { label: "Emergency", number: "190", note: "Police — or 192 for ambulance" }
+    ]
+  },
+  MX: {
+    name: "Mexico",
+    flag: "🇲🇽",
+    lines: [
+      { label: "Línea de la Vida", number: "800 911 2000", note: "24/7 — suicide prevention & mental health support" },
+      { label: "SAPTEL", number: "55 5259 8121", note: "24/7 free crisis counseling — abuse, anxiety, bullying" },
+      { label: "Emergency", number: "911", note: "Immediate danger" }
+    ]
+  },
+  JP: {
+    name: "Japan",
+    flag: "🇯🇵",
+    lines: [
+      { label: "Child Guidance Center Abuse Dial", number: "189", note: "24/7, toll-free, anonymous — \"ichi-haya-ku\" (dial quickly)" },
+      { label: "ChildLine Japan", number: "0120-99-7777", note: "Daily 4pm–9pm, for children & young people" },
+      { label: "TELL Lifeline", number: "03-5774-0992", note: "Daily 10am–10pm — support in English" },
+      { label: "Emergency", number: "110", note: "Police — or 119 for fire/ambulance" }
     ]
   },
   OTHER: {
