@@ -15,9 +15,30 @@ function initEntryFlow() {
   const mainSite = document.getElementById("mainSite");
   if (!welcomeScreen || !nicknameScreen || !countryScreen || !quizScreen || !mainSite) return;
 
-  // Always start at the welcome screen and always ask for a nickname —
-  // even for returning users. This matters on shared/public devices: no one
-  // should land straight in someone else's saved chat just by opening the site.
+  let nickname = sessionStorage.getItem("safevoice_nickname");
+  let country = sessionStorage.getItem("safevoice_country");
+  const quizDone = nickname && sessionStorage.getItem("safevoice_quiz_done_" + nickname) === "yes";
+
+  if (nickname && country && quizDone) {
+    hideAllScreens();
+    mainSite.hidden = false;
+    initMainSite(nickname, country);
+    return;
+  }
+  if (nickname && !country) {
+    hideAllScreens();
+    countryScreen.hidden = false;
+    populateCountryDropdown();
+    attachCountryEvents(nickname);
+    return;
+  }
+  if (nickname && country && !quizDone) {
+    hideAllScreens();
+    quizScreen.hidden = false;
+    startQuiz(nickname, country);
+    return;
+  }
+
   hideAllScreens();
   welcomeScreen.hidden = false;
 
@@ -35,57 +56,23 @@ function initEntryFlow() {
   }
 
   function continueWithNickname() {
-    const rawNick = (nicknameInput?.value || "").trim();
-    if (rawNick.length < 2) {
+    const nick = (nicknameInput?.value || "").trim();
+    if (nick.length < 2) {
       nicknameHint.textContent = "Please enter at least 2 characters.";
       nicknameHint.style.color = "#fb7185";
       return;
     }
-    if (rawNick.length > 20) {
+    if (nick.length > 20) {
       nicknameHint.textContent = "Please use 20 characters or less.";
       nicknameHint.style.color = "#fb7185";
       return;
     }
-
-    // Normalize to lowercase so "Moon", "moon", and "MOON" are treated as the
-    // same returning nickname — phone keyboards often auto-capitalize the
-    // first letter, which otherwise silently creates a "new" user each time.
-    const nick = rawNick.toLowerCase();
-
-    const savedNickname = sessionStorage.getItem("safevoice_nickname");
-    const isReturningNickname = Boolean(savedNickname) && nick === savedNickname;
-
     sessionStorage.setItem("safevoice_nickname", nick);
-
-    const savedCountry = sessionStorage.getItem("safevoice_country");
-    const quizDone = sessionStorage.getItem("safevoice_quiz_done_" + nick) === "yes";
-
-    if (isReturningNickname && savedCountry && quizDone) {
-      // Same nickname as before, quiz already completed:
-      // skip country + quiz, load their saved chat history, go straight in.
-      hideAllScreens();
-      mainSite.hidden = false;
-      initMainSite(nick, savedCountry);
-      return;
-    }
-
-    if (isReturningNickname && savedCountry && !quizDone) {
-      // Same nickname, country already on file, but the quiz wasn't finished
-      // last time — pick back up at the quiz instead of starting fully over.
-      hideAllScreens();
-      quizScreen.hidden = false;
-      startQuiz(nick, savedCountry);
-      return;
-    }
-
-    // New or different nickname (or no country on file yet for this nickname):
-    // start fresh — country selector, then quiz, then a new chat history.
-    // Any previous nickname's saved data (quiz answers, chat history) is left
-    // completely untouched, since it's stored under that nickname's own keys.
+    nickname = nick;
     hideAllScreens();
     countryScreen.hidden = false;
     populateCountryDropdown();
-    attachCountryEvents(nick);
+    attachCountryEvents(nickname);
   }
 
   if (nicknameContinueBtn) nicknameContinueBtn.onclick = continueWithNickname;
@@ -196,12 +183,78 @@ function renderQuizStep() {
   progressFill.style.width = question.progress;
   renderOptions(body, question.question, question.options, (value) => {
     QUIZ_STATE.answers[question.key] = value;
+    if (question.key === "q6" && value === "no" && QUIZ_STATE.answers.q1 === "self") {
+      renderNoTrustedAdultHelp(body, QUIZ_STATE.country, () => {
+        if (question.last) finishQuiz(QUIZ_STATE.answers);
+        else {
+          QUIZ_STATE.step += 1;
+          renderQuizStep();
+        }
+      });
+      return;
+    }
     if (question.last) finishQuiz(QUIZ_STATE.answers);
     else {
       QUIZ_STATE.step += 1;
       renderQuizStep();
     }
   });
+}
+
+function renderNoTrustedAdultHelp(container, countryKey, onContinue) {
+  container.textContent = "";
+  const data = (typeof HELPLINES !== "undefined" && (HELPLINES[countryKey] || HELPLINES.OTHER));
+
+  const heading = document.createElement("div");
+  heading.className = "quiz-question";
+  heading.textContent = "That's okay — not having told anyone yet doesn't mean you're out of options. Here's what you can still do right now:";
+  container.appendChild(heading);
+
+  const card = document.createElement("div");
+  card.className = "no-adult-help-card";
+
+  const steps = [
+    ["📞", "Call a free, confidential counselor", "You don't need a trusted adult to call a helpline — they're built for exactly this. Many are free, anonymous, and available 24/7."],
+    ["🏠", "Find a shelter if you need somewhere safe", "If home doesn't feel safe, shelters exist specifically to give children and teens a safe place to go, even without a parent's permission."],
+    ["🚓", "Contact the police if you're in danger now", "If you are in immediate physical danger, you can contact the police directly. You do not need an adult's permission to ask for help when you are unsafe."]
+  ];
+
+  steps.forEach(([icon, title, desc]) => {
+    const row = document.createElement("div");
+    row.className = "no-adult-help-row";
+    const iconEl = document.createElement("div");
+    iconEl.className = "no-adult-help-icon";
+    iconEl.textContent = icon;
+    const textWrap = document.createElement("div");
+    const titleEl = document.createElement("div");
+    titleEl.className = "no-adult-help-title";
+    titleEl.textContent = title;
+    const descEl = document.createElement("div");
+    descEl.className = "no-adult-help-desc";
+    descEl.textContent = desc;
+    textWrap.append(titleEl, descEl);
+    row.append(iconEl, textWrap);
+    card.appendChild(row);
+  });
+
+  if (data) {
+    const numbersEl = document.createElement("div");
+    numbersEl.className = "no-adult-help-numbers";
+    numbersEl.textContent = data.flag + " " + data.name + ": " + data.lines.map((line) => line.label + " " + line.number).join(" • ");
+    card.appendChild(numbersEl);
+  }
+
+  container.appendChild(card);
+
+  const list = document.createElement("div");
+  list.className = "quiz-options";
+  const continueButton = document.createElement("button");
+  continueButton.className = "quiz-option";
+  continueButton.type = "button";
+  continueButton.textContent = "I understand — continue";
+  continueButton.onclick = onContinue;
+  list.appendChild(continueButton);
+  container.appendChild(list);
 }
 
 function renderOptions(container, question, options, onSelect) {
@@ -368,7 +421,7 @@ function initChatWidget(nickname, countryKey) {
     const value = text.toLowerCase();
     const crisisWords = ["abuse", "hurt", "hit", "beat", "scared", "afraid", "threat", "blackmail", "sextortion", "suicide", "kill myself", "die", "end my life", "self-harm", "cutting", "unsafe"];
     const supportWords = ["sad", "lonely", "anxious", "depressed", "stress", "worried", "cry", "bully", "bullied", "bullying"];
-    if (crisisWords.some((word) => value.includes(word))) return "I’m sorry you’re going through this. You do not deserve to be hurt or threatened. I’m automated and not an emergency service. If you can, tell a trusted adult now and contact emergency services if there is immediate danger. " + helplinesText;
+    if (crisisWords.some((word) => value.includes(word))) return "I’m sorry you’re going through this. You do not deserve to be hurt or threatened. I’m automated and not an emergency service. If there's no trusted adult you can tell right now, you can still call a free counselor helpline directly, look into a shelter if home isn't safe, or contact the police if you're in danger — you don't need an adult's permission for any of these. " + helplinesText;
     if (supportWords.some((word) => value.includes(word))) return "Thank you for sharing that. Your feelings matter. I’m automated and cannot replace a qualified counselor, but a trusted adult or support service may be able to help. " + helplinesText;
     return "I’m having trouble reaching the automated assistant right now. I cannot handle emergencies. If you feel unsafe, contact a trusted adult, local emergency services, or a support line. " + helplinesText;
   }

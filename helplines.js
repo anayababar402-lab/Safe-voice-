@@ -9,10 +9,12 @@ const HELPLINES = {
     name: "Pakistan",
     flag: "🇵🇰",
     lines: [
-      { label: "Child Protection Bureau", number: "1121", note: "Official child rescue & protection" },
+      { label: "Child Protection & Welfare Bureau", number: "1121", note: "24/7 — Punjab, Islamabad & other provincial child protection units" },
       { label: "Madadgaar National Helpline", number: "1098", note: "24/7 child & women protection" },
+      { label: "Zainab Alert (Missing/Abducted Children)", number: "1099", note: "Nationwide, for missing or abducted children" },
+      { label: "Sahil", number: "0800-13518", note: "Toll-free — free legal aid & counseling for child sexual abuse, early marriage, domestic violence" },
       { label: "Umang Mental Health", number: "0311-7786264", note: "Confidential psychological first aid" },
-      { label: "FIA Cyber Crime", number: "1991", note: "Online harassment & blackmail" },
+      { label: "NCCIA Cyber Crime Helpline", number: "1799", note: "Online harassment & blackmail (replaced FIA Cyber Crime Wing, 2026)" },
       { label: "Police Emergency", number: "15", note: "Immediate danger" }
     ]
   },
@@ -115,7 +117,7 @@ const HELPLINES = {
     flag: "🇦🇪",
     lines: [
       { label: "Child Protection Hotline", number: "116111", note: "Nationwide, 24/7, Ministry of Interior" },
-      { label: "Aman (Abu Dhabi Police)", number: "800 2626", note: "Confidential reporting — safety & harassment" },
+      { label: "EWAA Shelter (Abu Dhabi)", number: "8007283", note: "Also known as 800-SAVE — women & children in Abu Dhabi" },
       { label: "Dubai Foundation for Women & Children", number: "800 111", note: "24/7 abuse support" },
       { label: "Emergency", number: "999", note: "Immediate danger" }
     ]
