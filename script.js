@@ -150,9 +150,10 @@ function renderQuizStep() {
     { label: "Question 2", progress: "25%", question: "Where is this happening?", key: "q2", options: [["home", "🏠 At home"], ["school", "🏫 At school"], ["online", "📱 Online / on my phone"], ["unsure", "🤷 Somewhere else / not sure"]] },
     { label: "Question 3", progress: "40%", question: "How long has this been happening?", key: "q3", options: [["just", "📅 Just started"], ["weeks", "⏳ A few weeks"], ["months", "📆 Months"], ["long", "🕰️ A long time"]] },
     { label: "Question 4", progress: "55%", question: "How much is this affecting you?", key: "q4", options: [["very", "😟 It’s a lot — I’m scared"], ["serious", "😔 It’s really affecting me"], ["unsure", "😕 Not sure — I just know something’s wrong"], ["low", "😶 It’s not too serious — I just want to talk"]] },
-    { label: "Question 5", progress: "70%", question: "Are you safe right now, in this moment?", key: "q5", options: [["safe", "✅ Yes, I’m okay right now"], ["unsafe", "⚠️ No, I’m scared right now"], ["notsure", "🤔 I’m not sure"]] },
-    { label: "Question 6", progress: "82%", question: "Have you reached out to anyone before — a helpline, a teacher, or a trusted adult?", key: "q6", options: [["yes", "✅ Yes, I’ve told someone"], ["no", "❌ No, I haven’t told anyone"], ["tried", "🤔 I tried but nothing changed"]] },
-    { label: "Question 7", progress: "95%", question: "Would you like help contacting someone who can protect you?", key: "q7", last: true, options: [["yes", "✅ Yes, show me who I can contact"], ["maybe", "💬 Maybe — let me think"], ["no", "❌ No — I just want to talk for now"]] }
+    { label: "Question 5", progress: "65%", question: "Are you safe right now, in this moment?", key: "q5", options: [["safe", "✅ Yes, I’m okay right now"], ["unsafe", "⚠️ No, I’m scared right now"], ["notsure", "🤔 I’m not sure"]] },
+    { label: "Question 6", progress: "78%", question: "Is there any adult in your life you trust, even if you haven’t told them about this?", key: "q6adult", options: [["yes", "✅ Yes, there is someone"], ["no", "❌ No, there isn’t anyone"]] },
+    { label: "Question 7", progress: "88%", question: "Have you reached out to anyone before — a helpline, a teacher, or a trusted adult?", key: "q6", options: [["yes", "✅ Yes, I’ve told someone"], ["no", "❌ No, I haven’t told anyone"], ["tried", "🤔 I tried but nothing changed"]] },
+    { label: "Question 8", progress: "95%", question: "Would you like help contacting someone who can protect you?", key: "q7", last: true, options: [["yes", "✅ Yes, show me who I can contact"], ["maybe", "💬 Maybe — let me think"], ["no", "❌ No — I just want to talk for now"]] }
   ];
   const otherQuestions = [
     { label: "Question 2", progress: "25%", question: "Who is this person to you?", key: "q2", options: [["friend", "👫 A friend"], ["sibling", "👨‍👩‍👧 A sibling"], ["student", "👦 A student"], ["otherperson", "🧑 Someone else"]] },
@@ -183,7 +184,7 @@ function renderQuizStep() {
   progressFill.style.width = question.progress;
   renderOptions(body, question.question, question.options, (value) => {
     QUIZ_STATE.answers[question.key] = value;
-    if (question.key === "q6" && value === "no" && QUIZ_STATE.answers.q1 === "self") {
+    if (question.key === "q6adult" && value === "no" && QUIZ_STATE.answers.q1 === "self") {
       renderNoTrustedAdultHelp(body, QUIZ_STATE.country, () => {
         if (question.last) finishQuiz(QUIZ_STATE.answers);
         else {
@@ -207,7 +208,7 @@ function renderNoTrustedAdultHelp(container, countryKey, onContinue) {
 
   const heading = document.createElement("div");
   heading.className = "quiz-question";
-  heading.textContent = "That's okay — not having told anyone yet doesn't mean you're out of options. Here's what you can still do right now:";
+  heading.textContent = "That's okay — not having a trusted adult right now doesn't mean you're out of options. Here's what you can still do right now:";
   container.appendChild(heading);
 
   const card = document.createElement("div");
