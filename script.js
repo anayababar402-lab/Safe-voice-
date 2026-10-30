@@ -421,10 +421,11 @@ function initChatWidget(nickname, countryKey) {
   const helplinesText = data ? "Contacts for " + data.flag + " " + data.name + ": " + data.lines.map((line) => line.label + ": " + line.number).join(" • ") + "." : "Please contact local emergency services or a trusted adult if you are in immediate danger.";
   function fallback(text) {
     const value = text.toLowerCase();
-    const crisisWords = ["abuse", "hurt", "hit", "beat", "scared", "afraid", "threat", "blackmail", "sextortion", "suicide", "kill myself", "die", "end my life", "self-harm", "cutting", "unsafe"];
-    const supportWords = ["sad", "lonely", "anxious", "depressed", "stress", "worried", "cry", "bully", "bullied", "bullying"];
-    if (crisisWords.some((word) => value.includes(word))) return "I’m sorry you’re going through this. You do not deserve to be hurt or threatened. I’m automated and not an emergency service. If there's no trusted adult you can tell right now, you can still call a free counselor helpline directly, look into a shelter if home isn't safe, or contact the police if you're in danger — you don't need an adult's permission for any of these. " + helplinesText;
-    if (supportWords.some((word) => value.includes(word))) return "Thank you for sharing that. Your feelings matter. I’m automated and cannot replace a qualified counselor, but a trusted adult or support service may be able to help. " + helplinesText;
+    // Whole-word matching so "within" or "studied" don't trigger a crisis reply
+    const crisisPattern = /\b(abus\w*|hurt\w*|hit|hits|hitting|beat|beats|beating|beaten|scared|afraid|threat\w*|blackmail\w*|sextortion|suicid\w*|kill myself|want to die|wanna die|die|end my life|don'?t want to live|self[- ]?harm|cutting|unsafe|rap(e|ed|ing)|molest\w*|touch(ed|es|ing) me|forced me)\b/i;
+    const supportPattern = /\b(sad|lonely|anxious|depress\w*|stress\w*|worried|cry|crying|bully|bullied|bullying)\b/i;
+    if (crisisPattern.test(value)) return "I’m sorry you’re going through this. You do not deserve to be hurt or threatened. I’m automated and not an emergency service. If there's no trusted adult you can tell right now, you can still call a free counselor helpline directly, look into a shelter if home isn't safe, or contact the police if you're in danger — you don't need an adult's permission for any of these. " + helplinesText;
+    if (supportPattern.test(value)) return "Thank you for sharing that. Your feelings matter. I’m automated and cannot replace a qualified counselor, but a trusted adult or support service may be able to help. " + helplinesText;
     return "I’m having trouble reaching the automated assistant right now. I cannot handle emergencies. If you feel unsafe, contact a trusted adult, local emergency services, or a support line. " + helplinesText;
   }
   function welcomeMessage() {
