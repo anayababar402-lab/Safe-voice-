@@ -483,4 +483,34 @@ function initChatWidget(nickname, countryKey) {
       input.focus();
     }
   };
+
+  // Cybersecurity Guide modal
+  const cyberGuideCard = document.getElementById("cyberGuideCard");
+  const cyberGuideModal = document.getElementById("cyberGuideModal");
+  const cyberGuideClose = document.getElementById("cyberGuideClose");
+
+  if (cyberGuideCard && cyberGuideModal && cyberGuideClose) {
+    const openCyberGuide = () => {
+      cyberGuideModal.hidden = false;
+      cyberGuideCard.setAttribute("aria-expanded", "true");
+    };
+    const closeCyberGuide = () => {
+      cyberGuideModal.hidden = true;
+      cyberGuideCard.setAttribute("aria-expanded", "false");
+    };
+    cyberGuideCard.addEventListener("click", openCyberGuide);
+    cyberGuideCard.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openCyberGuide();
+      }
+    });
+    cyberGuideClose.addEventListener("click", closeCyberGuide);
+    cyberGuideModal.addEventListener("click", (event) => {
+      if (event.target === cyberGuideModal) closeCyberGuide();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !cyberGuideModal.hidden) closeCyberGuide();
+    });
+  }
 }
