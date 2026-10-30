@@ -12,6 +12,62 @@
 </head>
 <body>
 
+  <!-- ================================================================= -->
+  <!-- ENTRY FLOW: Welcome -> Nickname -> Country -> Quiz -> Main site     -->
+  <!-- ================================================================= -->
+  <section id="welcomeScreen" class="entry-screen">
+    <div class="entry-card">
+      <div class="entry-shield" aria-hidden="true">🛡️</div>
+      <h1 class="entry-title">SafeVoice</h1>
+      <p class="entry-subtitle">A private, anonymous space for young people who need support. No real name. No account.</p>
+      <ul class="entry-points">
+        <li>🔒 Private &mdash; only a nickname, nothing else</li>
+        <li>💬 Talk, breathe, or find help near you</li>
+        <li>⚡ Quick Exit button always available</li>
+      </ul>
+      <button id="welcomeEnterBtn" class="btn btn-primary entry-btn" type="button">Enter SafeVoice</button>
+      <p class="entry-note">If you are in immediate danger, call your local emergency number.</p>
+    </div>
+  </section>
+
+  <section id="nicknameScreen" class="entry-screen" hidden>
+    <div class="entry-card">
+      <h2 class="entry-title-sm">Choose a nickname</h2>
+      <p class="entry-subtitle">Use any name you like &mdash; please don&rsquo;t use your real name.</p>
+      <label for="nicknameInput" class="sr-only">Nickname</label>
+      <input id="nicknameInput" class="entry-input" type="text" maxlength="20" placeholder="e.g. Moon" autocomplete="off" autocapitalize="off" spellcheck="false" />
+      <p id="nicknameHint" class="entry-hint">2&ndash;20 characters.</p>
+      <button id="nicknameContinueBtn" class="btn btn-primary entry-btn" type="button">Continue</button>
+    </div>
+  </section>
+
+  <section id="countryScreen" class="entry-screen" hidden>
+    <div class="entry-card">
+      <h2 class="entry-title-sm">Where are you?</h2>
+      <p class="entry-subtitle">We&rsquo;ll show helplines for your country.</p>
+      <label for="countrySelect" class="sr-only">Country</label>
+      <select id="countrySelect" class="entry-input">
+        <option value="">Select your country&hellip;</option>
+      </select>
+      <p id="countryHint" class="entry-hint">You can pick &ldquo;Other&rdquo; if yours isn&rsquo;t listed.</p>
+      <button id="countryContinueBtn" class="btn btn-primary entry-btn" type="button">Continue</button>
+    </div>
+  </section>
+
+  <section id="quizScreen" class="entry-screen" hidden>
+    <div class="entry-card quiz-card">
+      <div class="quiz-top">
+        <span id="quizStep" class="quiz-step">Question 1</span>
+        <button id="quizSkipBtn" class="quiz-skip" type="button">Skip</button>
+      </div>
+      <div class="quiz-progress" aria-hidden="true"><div id="quizProgressFill" class="quiz-progress-fill"></div></div>
+      <div id="quizBody" class="quiz-body"></div>
+      <p class="entry-note">Your answers stay on this device only.</p>
+    </div>
+  </section>
+
+  <div id="mainSite" hidden>
+
   <!-- Quick Emergency Exit Bar -->
   <aside class="quick-exit-bar" aria-label="Emergency quick exit">
     <div class="container exit-flex">
@@ -161,33 +217,16 @@
       <div class="container">
         <div class="section-heading">
           <h2>Emergency &amp; Support Contacts</h2>
-          <p>Verified hotlines available across Pakistan when you need direct human assistance.</p>
+          <p id="helplinesSubtitle">Verified hotlines available across Pakistan when you need direct human assistance.</p>
         </div>
 
-        <div class="helpline-grid">
-          <article class="helpline-card">
-            <h4>Police Emergency</h4>
-            <a href="tel:15" class="helpline-number">15</a>
-            <small>Pakistan Police Immediate Emergency Dispatch</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>NCCIA Cyber Crime Helpline</h4>
-            <a href="tel:1799" class="helpline-number">1799</a>
-            <small>Direct reporting for online harassment, blackmail, and unauthorized access</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>Mental Health Helpline (Umang)</h4>
-            <a href="tel:03117786264" class="helpline-number">0311-7786264</a>
-            <small>24/7 Confidential psychological first aid &amp; emotional support</small>
-          </article>
-
-          <article class="helpline-card">
-            <h4>Child Protection Bureau</h4>
-            <a href="tel:1121" class="helpline-number">1121</a>
-            <small>Official rescue &amp; protection services for children and minors</small>
-          </article>
+        <div id="helplinesGrid" class="helpline-grid">
+          <article class="helpline-card"><h4>Police Emergency</h4><a href="tel:15" class="helpline-number">15</a><small>Pakistan Police immediate emergency dispatch</small></article>
+          <article class="helpline-card"><h4>Madadgaar National Helpline</h4><a href="tel:1098" class="helpline-number">1098</a><small>24/7 child &amp; women protection</small></article>
+          <article class="helpline-card"><h4>Child Protection &amp; Welfare Bureau</h4><a href="tel:1121" class="helpline-number">1121</a><small>24/7 rescue &amp; protection for children</small></article>
+          <article class="helpline-card"><h4>Sahil</h4><a href="tel:080013518" class="helpline-number">0800-13518</a><small>Toll-free &mdash; legal aid &amp; counseling for child abuse</small></article>
+          <article class="helpline-card"><h4>Mental Health Helpline (Umang)</h4><a href="tel:03117786264" class="helpline-number">0311-7786264</a><small>Confidential psychological first aid</small></article>
+          <article class="helpline-card"><h4>NCCIA Cyber Crime Helpline</h4><a href="tel:1799" class="helpline-number">1799</a><small>Online harassment, blackmail, unauthorized access</small></article>
         </div>
       </div>
     </section>
@@ -218,10 +257,13 @@
           <div class="status-indicator" aria-hidden="true"></div>
           <div>
             <h2 id="chatHeading" class="chat-title">SafeVoice Assistant</h2>
-            <span class="chat-status-text">Confidential &amp; Private</span>
+            <span id="chatGreeting" class="chat-status-text">Confidential &amp; Private</span>
           </div>
         </div>
-        <button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close Chat">&times;</button>
+        <div class="chat-header-actions">
+          <button id="chatClearBtn" class="chat-clear-btn" type="button" aria-label="Clear chat">Clear</button>
+          <button id="chatCloseBtn" class="chat-close-btn" type="button" aria-label="Close Chat">&times;</button>
+        </div>
       </header>
 
       <!-- Message History List -->
@@ -288,6 +330,9 @@
     </div>
   </div>
 
+  </div><!-- /mainSite -->
+
+  <script src="helplines.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

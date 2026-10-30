@@ -287,6 +287,7 @@ function finishQuiz(answers) {
 function initMainSite(nickname, countryKey) {
   initQuickExit();
   initGrounding();
+  initCyberGuide();
   renderHelplines(countryKey);
   initChatWidget(nickname, countryKey);
 }
@@ -483,8 +484,9 @@ function initChatWidget(nickname, countryKey) {
       input.focus();
     }
   };
+}
 
-  // Cybersecurity Guide modal
+function initCyberGuide() {
   const cyberGuideCard = document.getElementById("cyberGuideCard");
   const cyberGuideModal = document.getElementById("cyberGuideModal");
   const cyberGuideClose = document.getElementById("cyberGuideClose");
