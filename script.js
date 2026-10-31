@@ -488,32 +488,36 @@ function initChatWidget(nickname, countryKey) {
 }
 
 function initCyberGuide() {
-  const cyberGuideCard = document.getElementById("cyberGuideCard");
-  const cyberGuideModal = document.getElementById("cyberGuideModal");
-  const cyberGuideClose = document.getElementById("cyberGuideClose");
+  // Works for every card that has a data-modal attribute pointing to a modal id
+  const cards = document.querySelectorAll(".feature-card-expandable[data-modal]");
 
-  if (cyberGuideCard && cyberGuideModal && cyberGuideClose) {
-    const openCyberGuide = () => {
-      cyberGuideModal.hidden = false;
-      cyberGuideCard.setAttribute("aria-expanded", "true");
+  cards.forEach((card) => {
+    const modal = document.getElementById(card.dataset.modal);
+    if (!modal) return;
+    const closeBtn = modal.querySelector(".simple-modal-close");
+
+    const open = () => {
+      modal.hidden = false;
+      card.setAttribute("aria-expanded", "true");
     };
-    const closeCyberGuide = () => {
-      cyberGuideModal.hidden = true;
-      cyberGuideCard.setAttribute("aria-expanded", "false");
+    const close = () => {
+      modal.hidden = true;
+      card.setAttribute("aria-expanded", "false");
     };
-    cyberGuideCard.addEventListener("click", openCyberGuide);
-    cyberGuideCard.addEventListener("keydown", (event) => {
+
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        openCyberGuide();
+        open();
       }
     });
-    cyberGuideClose.addEventListener("click", closeCyberGuide);
-    cyberGuideModal.addEventListener("click", (event) => {
-      if (event.target === cyberGuideModal) closeCyberGuide();
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) close();
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !cyberGuideModal.hidden) closeCyberGuide();
+      if (event.key === "Escape" && !modal.hidden) close();
     });
-  }
+  });
 }

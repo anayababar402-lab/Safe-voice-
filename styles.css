@@ -786,14 +786,16 @@ body {
   margin: 20px 0 8px;
 }
 
-.simple-modal ul {
+.simple-modal ul,
+.simple-modal ol {
   padding-left: 20px;
   color: var(--text-secondary);
   font-size: 0.92rem;
   line-height: 1.7;
 }
 
-.simple-modal ul li {
+.simple-modal ul li,
+.simple-modal ol li {
   margin-bottom: 8px;
 }
 
@@ -932,3 +934,10 @@ body {
   cursor: pointer;
 }
 .chat-clear-btn:hover { color: var(--text-primary); border-color: var(--border-active); }
+
+.simple-modal-intro {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}

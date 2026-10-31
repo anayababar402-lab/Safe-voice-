@@ -123,65 +123,29 @@
         </div>
 
         <div class="card-grid">
-          <article class="feature-card">
+          <article class="feature-card feature-card-expandable" id="privacyCard" data-modal="privacyModal" tabindex="0" role="button" aria-expanded="false" aria-controls="privacyModal">
             <div class="card-icon" aria-hidden="true">🔒</div>
             <h3>Privacy First</h3>
-            <p>No login or personal tracking required. Access tools and talk to the assistant with complete anonymity.</p>
+            <p>No login or personal tracking required. Access tools and talk to the assistant with complete anonymity. Tap to open.</p>
           </article>
 
-          <article class="feature-card">
+          <article class="feature-card feature-card-expandable" id="cyberTipsCard" data-modal="cyberTipsModal" tabindex="0" role="button" aria-expanded="false" aria-controls="cyberTipsModal">
             <div class="card-icon" aria-hidden="true">📱</div>
             <h3>Cyber Safety Tips</h3>
-            <p>Learn how to preserve digital evidence, secure your social accounts, and report threats without escalating conflict.</p>
+            <p>Learn how to preserve digital evidence, secure your social accounts, and report threats without escalating conflict. Tap to open.</p>
           </article>
 
-          <article class="feature-card feature-card-expandable" id="cyberGuideCard" tabindex="0" role="button" aria-expanded="false" aria-controls="cyberGuideModal">
+          <article class="feature-card feature-card-expandable" id="cyberGuideCard" data-modal="cyberGuideModal" tabindex="0" role="button" aria-expanded="false" aria-controls="cyberGuideModal">
             <div class="card-icon" aria-hidden="true">🛡️</div>
             <h3>Cybersecurity Guide</h3>
             <p>How to protect your accounts, spot online predators, and respond safely to blackmail or threats. Tap to open.</p>
           </article>
-        </div>
-      </div>
-    </section>
 
-    <!-- Police & Shelter Procedures -->
-    <section class="section section-alt" id="police-shelter">
-      <div class="container">
-        <div class="section-heading">
-          <h2>If You Need Police or Shelter Help</h2>
-          <p>Step-by-step, in plain language. You don't need a parent's permission to ask for any of this.</p>
-        </div>
-
-        <div class="procedure-grid">
-          <div class="procedure-card">
-            <h3>🚓 Contacting the Police</h3>
-            <ol>
-              <li>Call <strong>Police Emergency: 15</strong> if you are in danger right now.</li>
-              <li>For reporting abuse (not an emergency), you can call <strong>Madadgaar: 1098</strong> or <strong>Child Protection: 1121</strong> first — they can guide you or contact police on your behalf.</li>
-              <li>To file a formal report yourself (an FIR), go to the police station covering the area where it happened. By law, the officer in charge must record your report — they cannot refuse.</li>
-              <li>You'll tell them what happened in your own words; they'll write it down and read it back to you to confirm it's correct.</li>
-              <li>You are legally entitled to a free copy of the report — ask for it before you leave.</li>
-              <li>There is no fee for any of this, and you do not need a lawyer to make a report.</li>
-            </ol>
-          </div>
-
-          <div class="procedure-card">
-            <h3>🏠 Finding a Shelter</h3>
-            <ol>
-              <li>Call <strong>Child Protection: 1121</strong>, <strong>Madadgaar: 1098</strong>, or <strong>Sahil: 0800-13518</strong> first — they can connect you with a safe shelter rather than you having to find one alone.</li>
-              <li>Government shelters (Dar-ul-Aman) and organizations like the Edhi Foundation accept women and children in distress, including minors without a parent present.</li>
-              <li>It's safest to reach a shelter through one of these helplines rather than traveling to one on your own — they can help arrange safe transport and make sure you're expected.</li>
-            </ol>
-          </div>
-
-          <div class="procedure-card">
-            <h3>💬 No Trusted Adult, No Shelter Contact Yet?</h3>
-            <ol>
-              <li>That's still okay. Start with a phone call — <strong>Madadgaar (1098)</strong> or <strong>Sahil (0800-13518)</strong> are built for exactly this, and you don't need anyone's permission to call.</li>
-              <li>You can explain your situation and ask them directly what your options are — they can guide next steps, including shelter and legal support.</li>
-              <li>If you're in immediate danger, call <strong>15</strong> directly. Police are required to respond.</li>
-            </ol>
-          </div>
+          <article class="feature-card feature-card-expandable" id="policeCard" data-modal="policeModal" tabindex="0" role="button" aria-expanded="false" aria-controls="policeModal">
+            <div class="card-icon" aria-hidden="true">🚓</div>
+            <h3>Police &amp; Shelter Help</h3>
+            <p>Step-by-step, in plain language, for contacting the police or finding a safe shelter. You don't need a parent's permission. Tap to open.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -299,6 +263,96 @@
       </form>
     </section>
 
+    <!-- Police & Shelter Modal -->
+    <div id="policeModal" class="simple-modal-overlay" hidden>
+      <div class="simple-modal" role="dialog" aria-modal="true" aria-labelledby="policeTitle">
+        <button class="simple-modal-close" type="button" aria-label="Close">✕</button>
+        <h2 id="policeTitle">If You Need Police or Shelter Help</h2>
+        <p class="simple-modal-intro">Step-by-step, in plain language. You don't need a parent's permission to ask for any of this.</p>
+
+        <h3>🚓 Contacting the Police</h3>
+        <ol>
+              <li>Call <strong>Police Emergency: 15</strong> if you are in danger right now.</li>
+              <li>For reporting abuse (not an emergency), you can call <strong>Madadgaar: 1098</strong> or <strong>Child Protection: 1121</strong> first — they can guide you or contact police on your behalf.</li>
+              <li>To file a formal report yourself (an FIR), go to the police station covering the area where it happened. By law, the officer in charge must record your report — they cannot refuse.</li>
+              <li>You'll tell them what happened in your own words; they'll write it down and read it back to you to confirm it's correct.</li>
+              <li>You are legally entitled to a free copy of the report — ask for it before you leave.</li>
+              <li>There is no fee for any of this, and you do not need a lawyer to make a report.</li>
+            </ol>
+
+        <h3>🏠 Finding a Shelter</h3>
+        <ol>
+              <li>Call <strong>Child Protection: 1121</strong>, <strong>Madadgaar: 1098</strong>, or <strong>Sahil: 0800-13518</strong> first — they can connect you with a safe shelter rather than you having to find one alone.</li>
+              <li>Government shelters (Dar-ul-Aman) and organizations like the Edhi Foundation accept women and children in distress, including minors without a parent present.</li>
+              <li>It's safest to reach a shelter through one of these helplines rather than traveling to one on your own — they can help arrange safe transport and make sure you're expected.</li>
+            </ol>
+
+        <h3>💬 No Trusted Adult, No Shelter Contact Yet?</h3>
+        <ol>
+              <li>That's still okay. Start with a phone call — <strong>Madadgaar (1098)</strong> or <strong>Sahil (0800-13518)</strong> are built for exactly this, and you don't need anyone's permission to call.</li>
+              <li>You can explain your situation and ask them directly what your options are — they can guide next steps, including shelter and legal support.</li>
+              <li>If you're in immediate danger, call <strong>15</strong> directly. Police are required to respond.</li>
+            </ol>
+      </div>
+    </div>
+
+    <!-- Privacy First Modal -->
+    <div id="privacyModal" class="simple-modal-overlay" hidden>
+      <div class="simple-modal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+        <button class="simple-modal-close" type="button" aria-label="Close">✕</button>
+        <h2 id="privacyTitle">🔒 Privacy First</h2>
+
+        <h3>What we don't ask for</h3>
+        <ul>
+          <li>No account, password, real name, phone number, or location. Just a nickname you choose.</li>
+        </ul>
+
+        <h3>What happens to your messages</h3>
+        <ul>
+          <li>Your nickname and chat stay in your browser tab and are cleared when you close it.</li>
+          <li>To write a reply, your messages are sent to our server and then to a third-party AI service. Our server does not save them.</li>
+          <li>Please don't share your real name, address, school, or phone number in the chat.</li>
+        </ul>
+
+        <h3>Staying private on your device</h3>
+        <ul>
+          <li>Use the <strong>Quick Exit</strong> button if someone walks in.</li>
+          <li>A private or incognito window leaves less history on your phone.</li>
+          <li>If someone else can see your phone, close this tab when you finish.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cyber Safety Tips Modal -->
+    <div id="cyberTipsModal" class="simple-modal-overlay" hidden>
+      <div class="simple-modal" role="dialog" aria-modal="true" aria-labelledby="cyberTipsTitle">
+        <button class="simple-modal-close" type="button" aria-label="Close">✕</button>
+        <h2 id="cyberTipsTitle">📱 Cyber Safety Tips</h2>
+
+        <h3>Keep the evidence</h3>
+        <ul>
+          <li>Take screenshots that show the username, date, and the full message before you block anyone.</li>
+          <li>Save links and profile pages. Don't delete the messages, even if they upset you.</li>
+          <li>Keep copies somewhere safe, like a trusted adult's device.</li>
+        </ul>
+
+        <h3>Secure your accounts</h3>
+        <ul>
+          <li>Change your passwords and turn on two-factor authentication.</li>
+          <li>Make your profiles private and remove followers you don't know.</li>
+          <li>Log out of devices you don't recognize.</li>
+        </ul>
+
+        <h3>Report without escalating</h3>
+        <ul>
+          <li>Don't reply, argue, or take revenge. It usually makes things worse.</li>
+          <li>Use the app's Report and Block tools after saving your evidence.</li>
+          <li>Tell a trusted adult, or open the Helplines section for a cyber-crime or support line in your country.</li>
+          <li>Being targeted is never your fault.</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- Cybersecurity Guide Modal -->
     <div id="cyberGuideModal" class="simple-modal-overlay" hidden>
       <div class="simple-modal" role="dialog" aria-modal="true" aria-labelledby="cyberGuideTitle">
@@ -328,7 +382,7 @@
         </ul>
       </div>
     </div>
-  
+  </div>
 
   </div><!-- /mainSite -->
 
