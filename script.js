@@ -1,3 +1,10 @@
+// Wake the server early (Render free tier sleeps when idle), so the first chat reply is fast.
+(function wakeServer() {
+  try {
+    fetch("https://safevoice-server-59yy.onrender.com/health", { method: "GET", cache: "no-store" }).catch(() => {});
+  } catch (_) {}
+})();
+
 // ============================================================================
 // SafeVoice — script.js
 // Welcome → Nickname → Country → Quiz → Main Site → Chat
@@ -468,6 +475,10 @@ function initChatWidget(nickname, countryKey) {
     input.value = "";
     input.disabled = true;
     const typing = addBubble("Thinking…", "bot");
+    // If the server is waking up, tell the person so it doesn't feel broken.
+    const slowTimer = setTimeout(() => {
+      typing.querySelector("p").textContent = "Connecting you safely… this can take a moment the first time.";
+    }, 4000);
     try {
       const response = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: conversation }) });
       const payload = await response.json();
@@ -481,6 +492,7 @@ function initChatWidget(nickname, countryKey) {
       conversation.push({ role: "assistant", content: reply });
       save();
     } finally {
+      clearTimeout(slowTimer);
       input.disabled = false;
       input.focus();
     }
