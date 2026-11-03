@@ -3,9 +3,9 @@
    ========================================================================== */
 :root {
   /* Brand Backgrounds */
-  --bg-main: #0a0f1d;
+  --bg-main: #0b1020;
   --bg-secondary: #11182c;
-  --bg-card: #17233f;
+  --bg-card: #172340;
   --bg-card-light: #1f2f54;
   --bg-glass: rgba(17, 24, 44, 0.88);
 
@@ -17,7 +17,7 @@
 
   /* Typography Colors */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #a9b6cb;
   --text-muted: #64748b;
   --text-inverse: #030712;
 
@@ -31,8 +31,8 @@
   /* Layout & Transitions */
   --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -940,4 +940,147 @@ body {
   font-size: 0.92rem;
   line-height: 1.6;
   margin-bottom: 4px;
+}
+
+
+/* ==========================================================================
+   VISUAL REFRESH: warmer, softer, more polished (overrides, safe to remove)
+   ========================================================================== */
+:root {
+  --accent-warm: #a78bfa;
+  --accent-soft: #7dd3fc;
+  --shadow-soft: 0 10px 30px rgba(2, 6, 23, 0.45);
+  --glow-warm: rgba(167, 139, 250, 0.22);
+}
+
+body {
+  background:
+    radial-gradient(900px 500px at 10% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(6, 182, 212, 0.10), transparent 60%),
+    var(--bg-main);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { letter-spacing: -0.01em; }
+
+/* Header: frosted glass */
+.site-header {
+  background: rgba(11, 16, 32, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Hero: calmer, softer, more welcoming */
+.hero-section {
+  padding: 96px 0 72px;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(167, 139, 250, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 20% 70%, rgba(6, 182, 212, 0.10) 0%, transparent 50%);
+}
+.hero-title { letter-spacing: -0.03em; }
+.gradient-text { background: linear-gradient(135deg, #7dd3fc, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-subtitle { font-size: 1.2rem; line-height: 1.7; }
+
+/* Buttons: pill shaped, soft glow */
+.btn { border-radius: 999px; padding: 12px 26px; }
+.btn-primary {
+  background: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
+  color: #06101f;
+  box-shadow: 0 6px 18px rgba(129, 140, 248, 0.28);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px var(--glow-warm); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn-secondary, .btn-outline { backdrop-filter: blur(6px); }
+.btn:focus-visible, .chat-input:focus-visible, .entry-input:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 3px;
+}
+
+/* Quick Exit: always clear, calm but visible */
+.btn-exit {
+  background: #e5484d;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(229, 72, 77, 0.35);
+}
+.btn-exit:hover { background: #cf3b40; }
+
+/* Cards: soft depth + glass edge */
+.feature-card, .helpline-card, .procedure-card, .grounding-card {
+  background: linear-gradient(160deg, rgba(31, 47, 84, 0.65), rgba(23, 35, 64, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-soft);
+}
+.feature-card:hover {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 14px 36px rgba(2, 6, 23, 0.55), 0 0 0 1px rgba(167, 139, 250, 0.15);
+}
+.card-icon {
+  width: 56px; height: 56px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.7rem;
+  background: rgba(167, 139, 250, 0.14);
+  border-radius: 16px;
+}
+.helpline-card { transition: var(--transition); }
+.helpline-card:hover { transform: translateY(-3px); border-color: var(--border-active); }
+.helpline-number { color: var(--accent-soft); }
+
+.section-heading h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+
+/* Entry screens: friendlier first impression */
+.entry-screen {
+  background:
+    radial-gradient(700px 420px at 50% 0%, rgba(167, 139, 250, 0.16), transparent 60%),
+    var(--bg-main);
+}
+.entry-card {
+  background: linear-gradient(165deg, rgba(31, 47, 84, 0.75), rgba(23, 35, 64, 0.95));
+  box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+.entry-input { border-radius: 14px; }
+.quiz-option { border-radius: 14px; transition: var(--transition); }
+.quiz-option:hover { border-color: var(--accent-warm); transform: translateY(-1px); }
+.quiz-progress-fill { background: linear-gradient(90deg, #22d3ee, #a78bfa); }
+
+/* Chat: smoother bubbles and launcher */
+.chat-window {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.7);
+  overflow: hidden;
+}
+.chat-window-header {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(167, 139, 250, 0.16));
+  border-bottom: 1px solid var(--border-subtle);
+}
+.chat-bubble { border-radius: 18px; line-height: 1.5; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); }
+.bot-bubble { background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.06); border-bottom-left-radius: 6px; }
+.user-bubble { background: linear-gradient(135deg, #22d3ee, #818cf8); color: #06101f; border-bottom-right-radius: 6px; }
+.chat-input { border-radius: 999px; }
+.btn-chat-send { border-radius: 999px; background: linear-gradient(135deg, #22d3ee, #818cf8); }
+.chat-launcher { box-shadow: 0 10px 28px rgba(129, 140, 248, 0.4); }
+
+/* Modals */
+.simple-modal { border-radius: 22px; box-shadow: 0 24px 60px rgba(2, 6, 23, 0.7); }
+
+/* Gentle entrance animation for sections */
+@keyframes svFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.hero-section .container, .section-heading, .feature-card, .helpline-card {
+  animation: svFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Respect people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .hero-section { padding: 64px 0 48px; }
+  .btn { padding: 12px 22px; }
 }
